@@ -261,7 +261,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
 
     return (
       <TouchableWithoutFeedback
-        testID={testID}
+        testID={`@${testID}/container`}
         style={evaStyle.container}
         focusable={false}
         onPress={this.focus}>
@@ -279,6 +279,7 @@ export class Input extends React.Component<InputProps> implements WebEventRespon
             placeholderTextColor={evaStyle.placeholder.color}
             {...textInputProps}
             {...this.webEventResponder.eventHandlers}
+            testID={`@${testID}/input`}
             style={[evaStyle.text, styles.text, platformStyles.text, textStyle]}
             editable={!textInputProps.disabled}
             onFocus={this.onTextFieldFocus}
