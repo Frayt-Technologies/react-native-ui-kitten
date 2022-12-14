@@ -83,15 +83,15 @@ export class Card extends React.Component<CardProps> {
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-    this.props.onPressIn?.(event);
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-    this.props.onPressOut?.(event);
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       bodyPaddingVertical,
       bodyPaddingHorizontal,
@@ -140,8 +140,7 @@ export class Card extends React.Component<CardProps> {
         {...touchableProps}
         style={[styles.container, evaStyle.container, style]}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}
-      >
+        onPressOut={this.onPressOut}>
         <FalsyFC
           style={evaStyle.accent}
           fallback={this.renderStatusAccent(evaStyle.accent)}
@@ -152,7 +151,7 @@ export class Card extends React.Component<CardProps> {
           component={header}
         />
         {header && <Divider />}
-        <View style={[ styles.content, evaStyle.body ]}>
+        <View style={evaStyle.body}>
           {children}
         </View>
         {footer && <Divider />}
@@ -172,7 +171,4 @@ const styles = StyleSheet.create({
   transparent: {
     backgroundColor: 'transparent',
   },
-  content: {
-    flexShrink: 1,
-  }
 });

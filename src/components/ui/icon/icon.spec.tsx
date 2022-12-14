@@ -23,19 +23,13 @@ import {
 
 const DefaultIcon: IconProvider<IconProps> = {
   toReactElement: (props?: IconProps): React.ReactElement<IconProps> => (
-    <View
-      testID='default'
-      {...props}
-    />
+    <View testID='default' {...props} />
   ),
 };
 
 const AdditionalIcon: IconProvider<IconProps> = {
   toReactElement: (props?: IconProps): React.ReactElement<IconProps> => (
-    <View
-      testID='additional'
-      {...props}
-    />
+    <View testID='additional' {...props} />
   ),
 };
 
@@ -76,7 +70,7 @@ describe('@icon: component checks', () => {
 
   it('should render icon from default pack', () => {
     const component = render(
-      <Icon name='home' />,
+      <Icon name='home'/>,
     );
 
     expect(component.queryByTestId('default')).toBeTruthy();
@@ -95,10 +89,7 @@ describe('@icon: component checks', () => {
 
   it('should pass props to an icon component', () => {
     const component = render(
-      <Icon
-        name='home'
-        testID='custom-test-id'
-      />,
+      <Icon name='home' testID='custom-test-id'/>,
     );
 
     expect(component.queryByTestId('custom-test-id')).toBeTruthy();
@@ -107,7 +98,7 @@ describe('@icon: component checks', () => {
   it('should throw while rendering not registered icon', () => {
     expect(() => {
       render(
-        <Icon name='not-registered-icon' />,
+        <Icon name='not-registered-icon'/>,
       );
     }).toThrowError();
 
@@ -124,20 +115,14 @@ describe('@icon: component checks', () => {
   it('should throw while rendering icon from not registered pack', () => {
     expect(() => {
       render(
-        <Icon
-          name='home'
-          pack='not-registered-pack'
-        />,
+        <Icon name='home' pack='not-registered-pack'/>,
       );
     }).toThrowError();
   });
 
   it('should render without an animation if animation is null', () => {
     const component = render(
-      <Icon
-        name='home'
-        animation={null}
-      />,
+      <Icon name='home' animation={null} />,
     );
 
     expect(() => component.UNSAFE_getByType(Animated.View)).toThrow();

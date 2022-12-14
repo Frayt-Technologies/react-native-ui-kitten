@@ -31,18 +31,17 @@ import {
 
 describe('@list-item: component checks', () => {
 
-  const TestListItem = (props?: ListItemProps): React.ReactElement => (
+  const TestListItem = (props?: ListItemProps) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}
-    >
+      theme={light}>
       <ListItem {...props} />
     </ApplicationProvider>
   );
 
   it('should render text passed to title prop', () => {
     const component = render(
-      <TestListItem title='I love Babel' />,
+      <TestListItem title='I love Babel'/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -50,12 +49,7 @@ describe('@list-item: component checks', () => {
 
   it('should render functional component passed to title prop', () => {
     const component = render(
-      <TestListItem title={props => (
-        <Text {...props}>
-I love Babel
-        </Text>
-      )}
-      />,
+      <TestListItem title={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -63,12 +57,7 @@ I love Babel
 
   it('should render pure JXS component passed to title prop', () => {
     const component = render(
-      <TestListItem title={(
-        <Text>
-I love Babel
-        </Text>
-      )}
-      />,
+      <TestListItem title={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -76,7 +65,7 @@ I love Babel
 
   it('should render text passed to description prop', () => {
     const component = render(
-      <TestListItem description='I love Babel' />,
+      <TestListItem description='I love Babel'/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -84,12 +73,7 @@ I love Babel
 
   it('should render functional component passed to description prop', () => {
     const component = render(
-      <TestListItem description={props => (
-        <Text {...props}>
-I love Babel
-        </Text>
-      )}
-      />,
+      <TestListItem description={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -97,12 +81,7 @@ I love Babel
 
   it('should render pure JSX component passed to description prop', () => {
     const component = render(
-      <TestListItem description={(
-        <Text>
-I love Babel
-        </Text>
-      )}
-      />,
+      <TestListItem description={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -171,7 +150,7 @@ I love Babel
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
     const component = render(
-      <TestListItem onPressIn={onPressIn} />,
+      <TestListItem onPressIn={onPressIn}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
@@ -181,7 +160,7 @@ I love Babel
   it('should call onPressOut', () => {
     const onPressOut = jest.fn();
     const component = render(
-      <TestListItem onPressOut={onPressOut} />,
+      <TestListItem onPressOut={onPressOut}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
@@ -191,26 +170,22 @@ I love Babel
 
 describe('@list: component checks', () => {
 
-  const TestList = React.forwardRef((props: Partial<ListProps>, ref: React.Ref<List>) => (
+  const TestList = React.forwardRef((props: Partial<ListProps>, ref: React.Ref<List>) =>
     <ApplicationProvider
       mapping={mapping}
-      theme={light}
-    >
+      theme={light}>
       <List
         ref={ref}
         data={new Array(2)}
-        renderItem={() => <ListItem />}
+        renderItem={() => <ListItem/>}
         {...props}
       />
-    </ApplicationProvider>
-  ),
+    </ApplicationProvider>,
   );
-
-  TestList.displayName = 'TestList';
 
   it('should render 2 list items', () => {
     const component = render(
-      <TestList />,
+      <TestList/>,
     );
 
     expect(component.queryAllByType(ListItem).length).toEqual(2);
@@ -244,7 +219,7 @@ describe('@list: component checks', () => {
   it('should be able to call scrollToIndex with ref', () => {
     const componentRef = React.createRef<List>();
     render(
-      <TestList ref={componentRef} />,
+      <TestList ref={componentRef}/>,
     );
 
     expect(componentRef.current.scrollToIndex).toBeTruthy();
@@ -254,7 +229,7 @@ describe('@list: component checks', () => {
   it('should be able to call scrollToIndex with ref', () => {
     const componentRef = React.createRef<List>();
     render(
-      <TestList ref={componentRef} />,
+      <TestList ref={componentRef}/>,
     );
 
     expect(componentRef.current.scrollToOffset).toBeTruthy();

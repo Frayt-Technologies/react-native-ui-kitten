@@ -35,10 +35,9 @@ interface State {
   interaction: Interaction[];
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type WrappedComponentProps = any;
-type WrappedComponent = React.ComponentType<WrappedComponentProps>;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// TODO: Better types. React.ComponentType<WrappedComponentProps>?
+type WrappedComponent = any;
 type StyledComponent = any;
 
 /**
@@ -107,11 +106,11 @@ const styleInjector = (Component: WrappedComponent, name: string): StyledCompone
       interaction: [],
     };
 
-    private init = false;
+    private init: boolean = false;
     private defaultProps: WrappedComponentProps;
     private service: StyleConsumerService;
 
-    private onInit = (style: ThemeStyleType): void => {
+    private onInit = (style: ThemeStyleType, theme: ThemeType): void => {
       this.service = new StyleConsumerService(name, style);
       this.defaultProps = this.service.createDefaultProps();
       this.init = true;
@@ -122,8 +121,8 @@ const styleInjector = (Component: WrappedComponent, name: string): StyledCompone
     };
 
     private withEvaProp = (sourceProps: WrappedComponentProps,
-      sourceStyle: ThemeStyleType,
-      theme: ThemeType): StyledComponentProps => {
+                           sourceStyle: ThemeStyleType,
+                           theme: ThemeType): StyledComponentProps => {
 
       const props: WrappedComponentProps = { ...this.defaultProps, ...sourceProps };
       const style: StyleType = this.service.createStyleProp(props, sourceStyle, theme, this.state.interaction);
@@ -140,14 +139,14 @@ const styleInjector = (Component: WrappedComponent, name: string): StyledCompone
 
     private renderWrappedElement = (style: ThemeStyleType, theme: ThemeType): React.ReactElement => {
       if (!this.init) {
-        this.onInit(style);
+        this.onInit(style, theme);
       }
 
       const { forwardedRef, ...restProps } = this.props;
 
       return (
         <Component
-          {...this.withEvaProp(restProps, style, theme)}
+          {...this.withEvaProp(restProps as any, style, theme)}
           ref={forwardedRef}
         />
       );
@@ -155,15 +154,11 @@ const styleInjector = (Component: WrappedComponent, name: string): StyledCompone
 
     public render(): React.ReactElement {
       return (
-        <MappingContext.Consumer>
-          {(style: ThemeStyleType): React.ReactElement => (
-            <ThemeContext.Consumer>
-              {(theme: ThemeType): React.ReactElement => {
-                return this.renderWrappedElement(style, theme);
-              }}
-            </ThemeContext.Consumer>
-          )}
-        </MappingContext.Consumer>
+        <MappingContext.Consumer>{(style: ThemeStyleType): React.ReactElement => (
+          <ThemeContext.Consumer>{(theme: ThemeType): React.ReactElement => {
+            return this.renderWrappedElement(style, theme);
+          }}</ThemeContext.Consumer>
+        )}</MappingContext.Consumer>
       );
     }
   }

@@ -1,13 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import { EvaProp, Text, withStyles } from '@ui-kitten/components';
+import { Text, withStyles } from '@ui-kitten/components';
 
-const ThemedComponent = ({ eva }: { eva: EvaProp }): React.ReactElement => (
+const ThemedComponent = ({ eva }) => (
   <View style={eva.style.container}>
     <Text
       style={{ color: eva.theme['color-success-default'] }}
-      category='h4'
-    >
+      category='h4'>
       I use info as background color and success as text color!
     </Text>
   </View>

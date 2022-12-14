@@ -40,6 +40,10 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
  *
  * @extends React.Component
  *
+ * @method {() => void} show - Sets menu visible.
+ *
+ * @method {() => void} hide - Sets menu invisible.
+ *
  * @property {ReactElement<MenuItemProps> | ReactElement<MenuItemProps>[]} children -
  * items to be rendered within menu.
  *
@@ -105,11 +109,21 @@ export type OverflowMenuElement = React.ReactElement<OverflowMenuProps>;
 @styled('OverflowMenu')
 export class OverflowMenu extends React.Component<OverflowMenuProps> {
 
+  private popoverRef = React.createRef<Popover>();
+
   private get itemsCount(): number {
     return React.Children.count(this.props.children);
   }
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  public show = (): void => {
+    this.popoverRef.current?.show();
+  };
+
+  public hide = (): void => {
+    this.popoverRef.current?.hide();
+  };
+
+  private getComponentStyle = (source: StyleType) => {
     const { indicatorBackgroundColor, ...containerParameters } = source;
 
     return {
@@ -129,8 +143,7 @@ export class OverflowMenu extends React.Component<OverflowMenuProps> {
         style={styles.menu}
         initialNumToRender={this.itemsCount}
         showsVerticalScrollIndicator={false}
-        bounces={false}
-      >
+        bounces={false}>
         {this.props.children}
       </Menu>
     );
@@ -144,8 +157,8 @@ export class OverflowMenu extends React.Component<OverflowMenuProps> {
     return (
       <Popover
         {...popoverProps}
-        style={[styles.popover, evaStyle.container, style]}
-      >
+        ref={this.popoverRef}
+        style={[styles.popover, evaStyle.container, style]}>
         {contentElement}
       </Popover>
     );

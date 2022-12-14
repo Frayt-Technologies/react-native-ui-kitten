@@ -1,18 +1,18 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Layout, Toggle, ToggleProps } from '@ui-kitten/components';
+import { Layout, Toggle } from '@ui-kitten/components';
 
-const useToggleState = (initialState = false): ToggleProps => {
+const useToggleState = (initialState = false) => {
   const [checked, setChecked] = React.useState(initialState);
 
-  const onCheckedChange = (isChecked): void => {
+  const onCheckedChange = (isChecked) => {
     setChecked(isChecked);
   };
 
   return { checked, onChange: onCheckedChange };
 };
 
-export const ToggleStatusShowcase = (): React.ReactElement => {
+export const ToggleStatusShowcase = () => {
 
   const primaryToggleState = useToggleState();
   const successToggleState = useToggleState();
@@ -23,56 +23,47 @@ export const ToggleStatusShowcase = (): React.ReactElement => {
   const controlToggleState = useToggleState();
 
   return (
-    <Layout
-      style={styles.container}
-      level='1'
-    >
+    <Layout style={styles.container} level='1'>
 
       <Toggle
         style={styles.toggle}
         status='primary'
-        {...primaryToggleState}
-      >
+        {...primaryToggleState}>
         Primary
       </Toggle>
 
       <Toggle
         style={styles.toggle}
         status='success'
-        {...successToggleState}
-      >
+        {...successToggleState}>
         Success
       </Toggle>
 
       <Toggle
         style={styles.toggle}
         status='info'
-        {...infoToggleState}
-      >
+        {...infoToggleState}>
         Info
       </Toggle>
 
       <Toggle
         style={styles.toggle}
         status='warning'
-        {...warningToggleState}
-      >
+        {...warningToggleState}>
         Warning
       </Toggle>
 
       <Toggle
         style={styles.toggle}
         status='danger'
-        {...dangerToggleState}
-      >
+        {...dangerToggleState}>
         Danger
       </Toggle>
 
       <Toggle
         style={styles.toggle}
         status='basic'
-        {...basicToggleState}
-      >
+        {...basicToggleState}>
         Basic
       </Toggle>
 
@@ -80,8 +71,7 @@ export const ToggleStatusShowcase = (): React.ReactElement => {
         <Toggle
           style={styles.toggle}
           status='control'
-          {...controlToggleState}
-        >
+          {...controlToggleState}>
           Control
         </Toggle>
       </View>

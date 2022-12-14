@@ -12,11 +12,9 @@ export type ThemeType = Record<string, ThemeValue>;
 
 /**
  * Takes an actual theme provided by ApplicationProvider or ThemeProvider and
- * returns it to a functional component.
-
- * @overview-example UseThemeSimpleUsage
- * Complete list of theme variables could be found under [Light Theme Variables](design-system/eva-light-theme) table.
+ * @returns it to a functional component.
  *
+ * @overview-example UseThemeSimpleUsage
  */
 export const useTheme = (): ThemeType => {
   return React.useContext(ThemeContext);
@@ -42,8 +40,8 @@ export class ThemeService {
    * @returns ThemeValue if found, fallback param otherwise.
    */
   static getValue = (name: string,
-    theme: ThemeType,
-    fallback?: ThemeValue): ThemeValue | undefined => {
+                     theme: ThemeType,
+                     fallback?: ThemeValue): ThemeValue | undefined => {
 
     if (ThemeService.isReference(name)) {
       const themeKey: string = ThemeService.createKeyFromReference(name);

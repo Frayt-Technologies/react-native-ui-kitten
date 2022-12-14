@@ -36,9 +36,7 @@ type ButtonStyledProps = Overwrite<StyledComponentProps, {
   appearance?: LiteralUnion<'filled' | 'outline' | 'ghost'>;
 }>;
 
-type TouchableWebPropsWithoutChildren = Omit<TouchableWebProps, 'children'>;
-
-export interface ButtonProps extends TouchableWebPropsWithoutChildren, ButtonStyledProps {
+export interface ButtonProps extends TouchableWebProps, ButtonStyledProps {
   children?: RenderProp<TextProps> | React.ReactText;
   accessoryLeft?: RenderProp<Partial<ImageProps>>;
   accessoryRight?: RenderProp<Partial<ImageProps>>;
@@ -125,35 +123,35 @@ export class Button extends React.Component<ButtonProps> {
 
   private onMouseEnter = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.HOVER]);
-    this.props.onMouseEnter?.(event);
+    this.props.onMouseEnter && this.props.onMouseEnter(event);
   };
 
   private onMouseLeave = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-    this.props.onMouseLeave?.(event);
+    this.props.onMouseLeave && this.props.onMouseLeave(event);
   };
 
   private onFocus = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([Interaction.FOCUSED]);
-    this.props.onFocus?.(event);
+    this.props.onFocus && this.props.onFocus(event);
   };
 
   private onBlur = (event: NativeSyntheticEvent<TargetedEvent>): void => {
     this.props.eva.dispatch([]);
-    this.props.onBlur?.(event);
+    this.props.onBlur && this.props.onBlur(event);
   };
 
   private onPressIn = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([Interaction.ACTIVE]);
-    this.props.onPressIn?.(event);
+    this.props.onPressIn && this.props.onPressIn(event);
   };
 
   private onPressOut = (event: GestureResponderEvent): void => {
     this.props.eva.dispatch([]);
-    this.props.onPressOut?.(event);
+    this.props.onPressOut && this.props.onPressOut(event);
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       textColor,
       textFontFamily,
@@ -198,8 +196,7 @@ export class Button extends React.Component<ButtonProps> {
         onFocus={this.onFocus}
         onBlur={this.onBlur}
         onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}
-      >
+        onPressOut={this.onPressOut}>
         <FalsyFC
           style={evaStyle.icon}
           component={accessoryLeft}

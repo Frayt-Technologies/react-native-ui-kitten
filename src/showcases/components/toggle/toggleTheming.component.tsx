@@ -2,40 +2,34 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Layout, Toggle } from '@ui-kitten/components';
 
-export const ToggleThemingShowcase = (): React.ReactElement => {
+export const ToggleThemingShowcase = () => {
 
   const [activeChecked, setActiveChecked] = React.useState(true);
 
-  const onActiveCheckedChange = (isChecked): void => {
+  const onActiveCheckedChange = (isChecked) => {
     setActiveChecked(isChecked);
   };
 
   return (
-    <Layout
-      style={styles.container}
-      level='1'
-    >
+    <Layout style={styles.container} level='1'>
 
       <Toggle
         style={styles.toggle}
         checked={activeChecked}
-        onChange={onActiveCheckedChange}
-      >
+        onChange={onActiveCheckedChange}>
         Active
       </Toggle>
 
       <Toggle
         style={styles.toggle}
-        disabled={true}
-      >
+        disabled={true}>
         Disabled
       </Toggle>
 
       <Toggle
         style={styles.toggle}
         checked={true}
-        disabled={true}
-      >
+        disabled={true}>
         Checked Disabled
       </Toggle>
 

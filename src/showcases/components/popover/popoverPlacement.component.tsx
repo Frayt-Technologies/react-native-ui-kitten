@@ -17,35 +17,34 @@ const placements = [
   'right end',
 ];
 
-export const PopoverPlacementShowcase = (): React.ReactElement => {
+export const PopoverPlacementShowcase = () => {
 
   const [visible, setVisible] = React.useState(false);
   const [placementIndex, setPlacementIndex] = React.useState(new IndexPath(4));
   const placement = placements[placementIndex.row];
 
-  const onPlacementSelect = (index): void => {
+  const onPlacementSelect = (index) => {
     setPlacementIndex(index);
   };
 
-  const renderToggleButton = (): React.ReactElement => (
+  const renderToggleButton = () => (
     <Button onPress={() => setVisible(true)}>
       TOGGLE POPOVER
     </Button>
   );
 
-  const renderPlacementItem = (title): React.ReactElement => (
-    <SelectItem title={title} />
+  const renderPlacementItem = (title) => (
+    <SelectItem title={title}/>
   );
 
   return (
-    <>
+    <React.Fragment>
 
       <Select
         placeholder='Select Placement'
         value={placement}
         selectedIndex={placementIndex}
-        onSelect={onPlacementSelect}
-      >
+        onSelect={onPlacementSelect}>
         {placements.map(renderPlacementItem)}
       </Select>
 
@@ -55,13 +54,11 @@ export const PopoverPlacementShowcase = (): React.ReactElement => {
           anchor={renderToggleButton}
           visible={visible}
           placement={placement}
-          onBackdropPress={() => setVisible(false)}
-        >
+          onBackdropPress={() => setVisible(false)}>
           <Layout style={styles.content}>
             <Avatar
               style={styles.avatar}
-              source={require('../../assets/icon.png')}
-            />
+              source={require('../../assets/icon.png')}/>
             <Text>
               Welcome to UI Kitten 😻
             </Text>
@@ -70,7 +67,7 @@ export const PopoverPlacementShowcase = (): React.ReactElement => {
 
       </View>
 
-    </>
+    </React.Fragment>
   );
 };
 

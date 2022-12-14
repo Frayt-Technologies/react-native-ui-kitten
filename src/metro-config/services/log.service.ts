@@ -2,7 +2,6 @@ import chalk from 'chalk';
 
 const SEPARATOR = '\n';
 
-// eslint-disable-next-line no-restricted-syntax
 export default class LogService {
 
   static log = (...messages: string[]): void => {
@@ -33,7 +32,7 @@ export default class LogService {
     console.error(`${chalk.red.bold('error')} ${LogService.formatMessages(messages)}`);
   };
 
-  private static formatMessages = (messages: string[]): string => {
+  private static formatMessages = (messages: string[]) => {
     return chalk.reset(messages.join(SEPARATOR));
   };
 }

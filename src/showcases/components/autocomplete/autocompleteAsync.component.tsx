@@ -2,16 +2,16 @@ import React from 'react';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
 
-const requestData = (): Promise<Response> => fetch('https://reactnative.dev/movies.json');
+const requestData = () => fetch('https://reactnative.dev/movies.json');
 const requestDataWithDebounce = AwesomeDebouncePromise(requestData, 400);
 
-export const AutocompleteAsyncShowcase = (): React.ReactElement => {
+export const AutocompleteAsyncShowcase = () => {
 
   const [query, setQuery] = React.useState(null);
   const [data, setData] = React.useState([]);
 
-  const updateData = (): void => {
-    void requestDataWithDebounce()
+  const updateData = () => {
+    requestDataWithDebounce()
       .then(response => response.json())
       .then(json => json.movies)
       .then(applyFilter)
@@ -20,20 +20,19 @@ export const AutocompleteAsyncShowcase = (): React.ReactElement => {
 
   React.useEffect(updateData, [query]);
 
-  const onSelect = (index: number): void => {
+  const onSelect = (index: number) => {
     setQuery(data[index].title);
   };
 
-  const onChangeText = (nextQuery): void => {
+  const onChangeText = (nextQuery) => {
     setQuery(nextQuery);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const applyFilter = (options): any => {
+  const applyFilter = (options) => {
     return options.filter(item => item.title.toLowerCase().includes(query.toLowerCase()));
   };
 
-  const renderOption = (item, index): React.ReactElement => (
+  const renderOption = (item, index) => (
     <AutocompleteItem
       key={index}
       title={item.title}
@@ -44,10 +43,8 @@ export const AutocompleteAsyncShowcase = (): React.ReactElement => {
     <Autocomplete
       placeholder='For example, Star Wars'
       value={query}
-      placement='inner top'
       onChangeText={onChangeText}
-      onSelect={onSelect}
-    >
+      onSelect={onSelect}>
       {data.map(renderOption)}
     </Autocomplete>
   );

@@ -33,7 +33,6 @@ export type AvatarProps<P = ImageProps> = AvatarStyledProps & P & {
    * We use `any` here to prevent ts complains for most of the libraries that use
    * React.ComponentType & SomeType to describe static / instance methods for the components.
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ImageComponent?: React.ComponentType<P> & any;
 };
 
@@ -76,7 +75,7 @@ export class Avatar extends React.Component<AvatarProps> {
     ImageComponent: Image,
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const { roundCoefficient, ...containerParameters } = source;
 
     // @ts-ignore: avoid checking `containerParameters`

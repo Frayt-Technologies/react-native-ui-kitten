@@ -25,11 +25,10 @@ import {
 
 describe('@card: component checks', () => {
 
-  const TestCard = (props?: Partial<CardProps>): React.ReactElement => (
+  const TestCard = (props?: Partial<CardProps>) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}
-    >
+      theme={light}>
       <Card {...props} />
     </ApplicationProvider>
   );
@@ -37,9 +36,7 @@ describe('@card: component checks', () => {
   it('should render component passed to children', () => {
     const component = render(
       <TestCard>
-        <Text>
-          I love Babel
-        </Text>
+        <Text>I love Babel</Text>
       </TestCard>,
     );
 
@@ -48,12 +45,7 @@ describe('@card: component checks', () => {
 
   it('should render function component passed to header prop', () => {
     const component = render(
-      <TestCard header={props => (
-        <Text {...props}>
-          Test Card Header
-        </Text>
-      )}
-      />,
+      <TestCard header={props => <Text {...props}>Test Card Header</Text>}/>,
     );
 
     expect(component.queryByText('Test Card Header')).toBeTruthy();
@@ -61,12 +53,7 @@ describe('@card: component checks', () => {
 
   it('should render JSX component passed to header prop', () => {
     const component = render(
-      <TestCard header={(
-        <Text>
-          Test Card Header
-        </Text>
-      )}
-      />,
+      <TestCard header={<Text>Test Card Header</Text>}/>,
     );
 
     expect(component.queryByText('Test Card Header')).toBeTruthy();
@@ -74,12 +61,7 @@ describe('@card: component checks', () => {
 
   it('should render function component passed to footer prop', () => {
     const component = render(
-      <TestCard footer={props => (
-        <Text {...props}>
-          Test Card Footer
-        </Text>
-      )}
-      />,
+      <TestCard footer={props => <Text {...props}>Test Card Footer</Text>}/>,
     );
 
     expect(component.queryByText('Test Card Footer')).toBeTruthy();
@@ -87,12 +69,7 @@ describe('@card: component checks', () => {
 
   it('should render JSX component passed to footer prop', () => {
     const component = render(
-      <TestCard footer={(
-        <Text>
-          Test Card Footer
-        </Text>
-      )}
-      />,
+      <TestCard footer={<Text>Test Card Footer</Text>}/>,
     );
 
     expect(component.queryByText('Test Card Footer')).toBeTruthy();
@@ -100,12 +77,7 @@ describe('@card: component checks', () => {
 
   it('should render function component passed to accent prop', () => {
     const component = render(
-      <TestCard accent={props => (
-        <Text {...props}>
-          Test Card Accent
-        </Text>
-      )}
-      />,
+      <TestCard accent={props => <Text {...props}>Test Card Accent</Text>}/>,
     );
 
     expect(component.queryByText('Test Card Accent')).toBeTruthy();
@@ -113,12 +85,7 @@ describe('@card: component checks', () => {
 
   it('should render JSX component passed to accent prop', () => {
     const component = render(
-      <TestCard footer={(
-        <Text>
-          Test Card Accent
-        </Text>
-      )}
-      />,
+      <TestCard footer={<Text>Test Card Accent</Text>}/>,
     );
 
     expect(component.queryByText('Test Card Accent')).toBeTruthy();
@@ -127,7 +94,7 @@ describe('@card: component checks', () => {
   it('should call onPress', () => {
     const onPress = jest.fn();
     const component = render(
-      <TestCard onPress={onPress} />,
+      <TestCard onPress={onPress}/>,
     );
 
     fireEvent.press(component.queryByType(TouchableOpacity));
@@ -137,7 +104,7 @@ describe('@card: component checks', () => {
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
     const component = render(
-      <TestCard onPressIn={onPressIn} />,
+      <TestCard onPressIn={onPressIn}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
@@ -147,7 +114,7 @@ describe('@card: component checks', () => {
   it('should call onPressOut', () => {
     const onPressOut = jest.fn();
     const component = render(
-      <TestCard onPressOut={onPressOut} />,
+      <TestCard onPressOut={onPressOut}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');

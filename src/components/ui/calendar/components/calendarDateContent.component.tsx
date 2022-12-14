@@ -29,11 +29,8 @@ export class CalendarDateContent extends React.Component<CalendarDateContentProp
     return (
       <View
         {...viewProps}
-        style={[styles.container, style]}
-      >
-        <Text style={textStyle}>
-          {children}
-        </Text>
+        style={[styles.container, style]}>
+        <Text style={textStyle}>{children}</Text>
       </View>
     );
   }

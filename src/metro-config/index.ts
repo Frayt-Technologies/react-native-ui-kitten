@@ -6,12 +6,7 @@ import { EvaConfig } from './services/eva-config.service';
 import ProjectService from './services/project.service';
 
 // TS definitions for metro config?
-type MetroConfigType = {
-  reporter?: {
-    update: (event) => void;
-  };
-  watchFolders?: Array<string>;
-};
+type MetroConfigType = any;
 
 const defaultMetroConfig = MetroConfig.getDefaultValues();
 const customMappingWatchOptions = {
@@ -50,9 +45,9 @@ const customMappingWatchOptions = {
 export const create = (evaConfig: EvaConfig, metroConfig?: MetroConfigType): MetroConfigType => {
 
   const handleMetroEvent = (event): void => {
-    const reporter = metroConfig?.reporter || defaultMetroConfig.reporter;
+    const reporter = metroConfig && metroConfig.reporter || defaultMetroConfig.reporter;
 
-    if (reporter?.update) {
+    if (reporter && reporter.update) {
       reporter.update(event);
     }
 

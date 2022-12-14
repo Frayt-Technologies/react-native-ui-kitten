@@ -31,18 +31,17 @@ import {
 
 describe('@drawer-item: component checks', () => {
 
-  const TestDrawerItem = (props?: DrawerItemProps): React.ReactElement => (
+  const TestDrawerItem = (props?: DrawerItemProps) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}
-    >
-      <DrawerItem {...props} />
+      theme={light}>
+      <DrawerItem {...props}/>
     </ApplicationProvider>
   );
 
   it('should render text passed to title prop', () => {
     const component = render(
-      <TestDrawerItem title='I love Babel' />,
+      <TestDrawerItem title='I love Babel'/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -50,12 +49,7 @@ describe('@drawer-item: component checks', () => {
 
   it('should render function component passed to title prop', () => {
     const component = render(
-      <TestDrawerItem title={props => (
-        <Text {...props}>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestDrawerItem title={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -63,12 +57,7 @@ describe('@drawer-item: component checks', () => {
 
   it('should render pure JSX component passed to title prop', () => {
     const component = render(
-      <TestDrawerItem title={(
-        <Text>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestDrawerItem title={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -137,7 +126,7 @@ describe('@drawer-item: component checks', () => {
   it('should call onPress', () => {
     const onPress = jest.fn();
     const component = render(
-      <TestDrawerItem onPress={onPress} />,
+      <TestDrawerItem onPress={onPress}/>,
     );
 
     fireEvent.press(component.queryByType(TouchableOpacity));
@@ -148,21 +137,20 @@ describe('@drawer-item: component checks', () => {
 
 describe('@drawer: component checks', () => {
 
-  const TestDrawer = (props?: DrawerProps): React.ReactElement => (
+  const TestDrawer = (props?: DrawerProps) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}
-    >
+      theme={light}>
       <Drawer {...props}>
-        <DrawerItem />
-        <DrawerItem />
+        <DrawerItem/>
+        <DrawerItem/>
       </Drawer>
     </ApplicationProvider>
   );
 
   it('should render 2 drawer items passed to children', () => {
     const component = render(
-      <TestDrawer />,
+      <TestDrawer/>,
     );
 
     const items = component.queryAllByType(DrawerItem);
@@ -171,12 +159,7 @@ describe('@drawer: component checks', () => {
 
   it('should render function component passed to header prop', () => {
     const component = render(
-      <TestDrawer header={() => (
-        <Text>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestDrawer header={() => <Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -184,12 +167,7 @@ describe('@drawer: component checks', () => {
 
   it('should render pure JSX component passed to header prop', () => {
     const component = render(
-      <TestDrawer header={(
-        <Text>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestDrawer header={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -197,12 +175,7 @@ describe('@drawer: component checks', () => {
 
   it('should render function component passed to footer prop', () => {
     const component = render(
-      <TestDrawer footer={() => (
-        <Text>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestDrawer footer={() => <Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -210,12 +183,7 @@ describe('@drawer: component checks', () => {
 
   it('should render pure JSX component passed to footer prop', () => {
     const component = render(
-      <TestDrawer footer={(
-        <Text>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestDrawer footer={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();

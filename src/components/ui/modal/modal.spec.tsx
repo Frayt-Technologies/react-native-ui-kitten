@@ -9,6 +9,7 @@ import {
   Button,
   StyleSheet,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 import {
   fireEvent,
@@ -28,8 +29,8 @@ import {
 
 describe('@modal: component checks', () => {
 
-  const TestModal = (props: Partial<ModalProps>): React.ReactElement => {
-    const [visible, setVisible] = React.useState(props.visible || false);
+  const TestModal = (props: Partial<ModalProps>) => {
+    const [visible, setVisible] = React.useState(props.visible);
     const [text, setText] = React.useState('I love Babel');
 
     const toggleVisible = (): void => {
@@ -41,30 +42,14 @@ describe('@modal: component checks', () => {
     };
 
     return (
-      <ApplicationProvider
-        mapping={mapping}
-        theme={light}
-      >
-        <>
-          <Modal
-            {...props}
-            visible={visible}
-          >
-            <Text>
-              {text}
-            </Text>
-            <Button
-              testID='@modal/change-text-button'
-              title=''
-              onPress={changeText}
-            />
+      <ApplicationProvider mapping={mapping} theme={light}>
+        <React.Fragment>
+          <Modal {...props} visible={visible}>
+            <Text>{text}</Text>
+            <Button testID='@modal/change-text-button' title='' onPress={changeText}/>
           </Modal>
-          <Button
-            testID='@modal/toggle-button'
-            title=''
-            onPress={toggleVisible}
-          />
-        </>
+          <Button testID='@modal/toggle-button' title='' onPress={toggleVisible}/>
+        </React.Fragment>
       </ApplicationProvider>
     );
   };
@@ -77,13 +62,13 @@ describe('@modal: component checks', () => {
    */
   const touchables = {
     findToggleButton: (api: RenderAPI) => api.queryByTestId('@modal/toggle-button'),
-    findBackdropTouchable: (api: RenderAPI) => api.queryByTestId('@backdrop'),
+    findBackdropTouchable: (api: RenderAPI) => api.queryAllByType(TouchableOpacity)[1],
     findChangeTextButton: (api: RenderAPI) => api.queryByTestId('@modal/change-text-button'),
   };
 
   it('should render nothing when invisible', async () => {
     const component = render(
-      <TestModal />,
+      <TestModal/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeFalsy();
@@ -91,7 +76,7 @@ describe('@modal: component checks', () => {
 
   it('should render element passed to children when becomes visible', async () => {
     const component = render(
-      <TestModal />,
+      <TestModal/>,
     );
 
     fireEvent.press(touchables.findToggleButton(component));
@@ -102,7 +87,7 @@ describe('@modal: component checks', () => {
 
   it('should render nothing when becomes invisible', async () => {
     const component = render(
-      <TestModal />,
+      <TestModal/>,
     );
 
     fireEvent.press(touchables.findToggleButton(component));
@@ -116,7 +101,7 @@ describe('@modal: component checks', () => {
 
   it('should be able to interact with content element passed to children', async () => {
     const component = render(
-      <TestModal />,
+      <TestModal/>,
     );
 
     fireEvent.press(touchables.findToggleButton(component));
@@ -131,7 +116,7 @@ describe('@modal: component checks', () => {
   it('should call onBackdropPress', async () => {
     const onBackdropPress = jest.fn();
     const component = render(
-      <TestModal onBackdropPress={onBackdropPress} />,
+      <TestModal onBackdropPress={onBackdropPress}/>,
     );
 
     fireEvent.press(touchables.findToggleButton(component));
@@ -143,9 +128,8 @@ describe('@modal: component checks', () => {
   });
 
   it('should style backdrop with backdropStyle prop', async () => {
-    const styles = { backgroundColor: 'red' };
     const component = render(
-      <TestModal backdropStyle={styles} />,
+      <TestModal backdropStyle={{ backgroundColor: 'red' }}/>,
     );
 
     fireEvent.press(touchables.findToggleButton(component));

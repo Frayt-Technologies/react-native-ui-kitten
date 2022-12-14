@@ -33,7 +33,7 @@ describe('@calendar: component checks', () => {
    * Get rid of useNativeDriver warnings
    */
   beforeAll(() => {
-    jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
+    jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
   });
 
   afterAll(() => {
@@ -52,14 +52,13 @@ describe('@calendar: component checks', () => {
 
     const onSelect = (nextDate: Date | Moment): void => {
       setDate(date);
-      props.onSelect?.(nextDate);
+      props.onSelect && props.onSelect(nextDate);
     };
 
     return (
       <ApplicationProvider
         mapping={mapping}
-        theme={light}
-      >
+        theme={light}>
         <Calendar
           ref={ref}
           {...props}
@@ -70,15 +69,13 @@ describe('@calendar: component checks', () => {
     );
   });
 
-  TestCalendar.displayName = 'TestCalendar';
-
   it('should request date change on day select', () => {
     const onSelect = jest.fn((date: Date) => {
       expect(date).toEqual(new Date(now.getFullYear(), now.getMonth(), 7));
     });
 
     const component = render(
-      <TestCalendar onSelect={onSelect} />,
+      <TestCalendar onSelect={onSelect}/>,
     );
 
     fireEvent.press(component.queryByText('7'));
@@ -90,10 +87,7 @@ describe('@calendar: component checks', () => {
     });
 
     const component = render(
-      <TestCalendar
-        startView={CalendarViewModes.MONTH}
-        onSelect={onSelect}
-      />,
+      <TestCalendar startView={CalendarViewModes.MONTH} onSelect={onSelect}/>,
     );
 
     fireEvent.press(component.queryByText('Jul'));
@@ -108,10 +102,7 @@ describe('@calendar: component checks', () => {
     });
 
     const component = render(
-      <TestCalendar
-        startView={CalendarViewModes.YEAR}
-        onSelect={onSelect}
-      />,
+      <TestCalendar startView={CalendarViewModes.YEAR} onSelect={onSelect}/>,
     );
 
     fireEvent.press(component.queryByText(`${now.getFullYear() + 1}`));
@@ -126,10 +117,7 @@ describe('@calendar: component checks', () => {
   it('should be rendered with view passed to startView prop', () => {
     const componentRef = React.createRef<Calendar>();
     render(
-      <TestCalendar
-        ref={componentRef}
-        startView={CalendarViewModes.YEAR}
-      />,
+      <TestCalendar ref={componentRef} startView={CalendarViewModes.YEAR}/>,
     );
 
     expect(componentRef.current.state.viewMode).toEqual(CalendarViewModes.YEAR);
@@ -138,7 +126,7 @@ describe('@calendar: component checks', () => {
   it('should change month to next when navigation button pressed', () => {
     const componentRef = React.createRef<Calendar>();
     const component = render(
-      <TestCalendar ref={componentRef} />,
+      <TestCalendar ref={componentRef}/>,
     );
 
     const initialDate = componentRef.current.state.visibleDate;
@@ -154,7 +142,7 @@ describe('@calendar: component checks', () => {
   it('should change month to previous when navigation button pressed', () => {
     const componentRef = React.createRef<Calendar>();
     const component = render(
-      <TestCalendar ref={componentRef} />,
+      <TestCalendar ref={componentRef}/>,
     );
 
     const initialDate = componentRef.current.state.visibleDate;
@@ -170,10 +158,7 @@ describe('@calendar: component checks', () => {
   it('should change year to next when navigation button pressed', () => {
     const componentRef = React.createRef<Calendar>();
     const component = render(
-      <TestCalendar
-        ref={componentRef}
-        startView={CalendarViewModes.YEAR}
-      />,
+      <TestCalendar ref={componentRef} startView={CalendarViewModes.YEAR}/>,
     );
 
     const initialDate = componentRef.current.state.visibleDate;
@@ -190,10 +175,7 @@ describe('@calendar: component checks', () => {
   it('should change year to previous when navigation button pressed', () => {
     const componentRef = React.createRef<Calendar>();
     const component = render(
-      <TestCalendar
-        ref={componentRef}
-        startView={CalendarViewModes.YEAR}
-      />,
+      <TestCalendar ref={componentRef} startView={CalendarViewModes.YEAR}/>,
     );
 
     const initialDate = componentRef.current.state.visibleDate;
@@ -271,7 +253,7 @@ describe('@calendar: component checks', () => {
 
   it('should render element provided with renderDay prop', async () => {
     const component = render(
-      <TestCalendar renderDay={() => <View testID='@calendar/cell' />} />,
+      <TestCalendar renderDay={() => <View testID='@calendar/cell'/>}/>,
     );
 
     const cells = component.queryAllByTestId('@calendar/cell');
@@ -282,7 +264,7 @@ describe('@calendar: component checks', () => {
     const component = render(
       <TestCalendar
         startView={CalendarViewModes.MONTH}
-        renderMonth={() => <View testID='@calendar/cell' />}
+        renderMonth={() => <View testID='@calendar/cell'/>}
       />,
     );
 
@@ -294,7 +276,7 @@ describe('@calendar: component checks', () => {
     const component = render(
       <TestCalendar
         startView={CalendarViewModes.YEAR}
-        renderYear={() => <View testID='@calendar/cell' />}
+        renderYear={() => <View testID='@calendar/cell'/>}
       />,
     );
 
@@ -306,7 +288,7 @@ describe('@calendar: component checks', () => {
     const component = render(
       <TestCalendar
         startView={CalendarViewModes.YEAR}
-        renderFooter={() => <View testID='@calendar/footer' />}
+        renderFooter={() => <View testID='@calendar/footer'/>}
       />,
     );
 

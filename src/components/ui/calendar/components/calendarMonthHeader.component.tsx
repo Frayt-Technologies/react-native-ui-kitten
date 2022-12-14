@@ -11,9 +11,7 @@ import {
   ViewProps,
 } from 'react-native';
 
-type ViewPropsWithoutChildren = Omit<ViewProps, 'children'>;
-
-export interface CalendarMonthHeaderProps extends ViewPropsWithoutChildren {
+export interface CalendarMonthHeaderProps extends ViewProps {
   data: string[];
   children: (data: string, index: number) => React.ReactElement;
 }
@@ -28,8 +26,7 @@ export class CalendarMonthHeader extends React.Component<CalendarMonthHeaderProp
     return (
       <View
         {...viewProps}
-        style={[styles.container, style]}
-      >
+        style={[styles.container, style]}>
         {data.map(children)}
       </View>
     );

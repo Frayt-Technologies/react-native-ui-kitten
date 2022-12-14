@@ -8,7 +8,7 @@ import React from 'react';
 import { IconRegistryService } from './service/iconRegistry.service';
 import { IconPack } from './service/type';
 
-type IconsProp = IconPack<unknown> | IconPack<unknown>[];
+type IconsProp = IconPack<any> | IconPack<any>[];
 
 export interface IconRegistryProps {
   icons: IconsProp;
@@ -57,8 +57,8 @@ export class IconRegistry extends React.Component<IconRegistryProps> {
     icons: [],
   };
 
-  private findDefaultIconPack = (packs: IconPack<unknown>[], name: string): IconPack<unknown> => {
-    const requestedPackIndex: number = packs.findIndex((pack: IconPack<unknown>): boolean => {
+  private findDefaultIconPack = (packs: IconPack<any>[], name: string): IconPack<any> => {
+    const requestedPackIndex: number = packs.findIndex((pack: IconPack<any>): boolean => {
       return pack.name === name;
     });
 
@@ -66,8 +66,8 @@ export class IconRegistry extends React.Component<IconRegistryProps> {
   };
 
   private registerIcons = (source: IconsProp, defaultPack: string): void => {
-    const packs: IconPack<unknown>[] = Array.isArray(source) ? source : [source];
-    const defaultIconPack: IconPack<unknown> = this.findDefaultIconPack(packs, defaultPack);
+    const packs: IconPack<any>[] = Array.isArray(source) ? source : [source];
+    const defaultIconPack: IconPack<any> = this.findDefaultIconPack(packs, defaultPack);
 
     IconRegistryService.register(...packs);
     IconRegistryService.setDefaultIconPack(defaultIconPack.name);

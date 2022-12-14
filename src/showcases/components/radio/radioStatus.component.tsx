@@ -1,13 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Layout, Radio, RadioProps } from '@ui-kitten/components';
+import { Layout, Radio } from '@ui-kitten/components';
 
-const useRadioState = (initialCheck = false): RadioProps => {
+const useRadioState = (initialCheck = false) => {
   const [checked, setChecked] = React.useState(initialCheck);
   return { checked, onChange: setChecked };
 };
 
-export const RadioStatusShowcase = (): React.ReactElement => {
+export const RadioStatusShowcase = () => {
 
   const primaryRadioState = useRadioState();
   const successRadioState = useRadioState();
@@ -18,56 +18,47 @@ export const RadioStatusShowcase = (): React.ReactElement => {
   const controlRadioState = useRadioState();
 
   return (
-    <Layout
-      style={styles.container}
-      level='1'
-    >
+    <Layout style={styles.container} level='1'>
 
       <Radio
         style={styles.radio}
         status='primary'
-        {...primaryRadioState}
-      >
+        {...primaryRadioState}>
         Primary
       </Radio>
 
       <Radio
         style={styles.radio}
         status='success'
-        {...successRadioState}
-      >
+        {...successRadioState}>
         Success
       </Radio>
 
       <Radio
         style={styles.radio}
         status='info'
-        {...infoRadioState}
-      >
+        {...infoRadioState}>
         Info
       </Radio>
 
       <Radio
         style={styles.radio}
         status='warning'
-        {...warningRadioState}
-      >
+        {...warningRadioState}>
         Warning
       </Radio>
 
       <Radio
         style={styles.radio}
         status='danger'
-        {...dangerRadioState}
-      >
+        {...dangerRadioState}>
         Danger
       </Radio>
 
       <Radio
         style={styles.radio}
         status='basic'
-        {...basicRadioState}
-      >
+        {...basicRadioState}>
         Basic
       </Radio>
 
@@ -75,8 +66,7 @@ export const RadioStatusShowcase = (): React.ReactElement => {
         <Radio
           style={styles.radio}
           status='control'
-          {...controlRadioState}
-        >
+          {...controlRadioState}>
           Control
         </Radio>
       </View>

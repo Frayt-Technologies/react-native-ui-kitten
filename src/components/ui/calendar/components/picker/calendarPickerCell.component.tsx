@@ -6,9 +6,7 @@
 
 import React from 'react';
 import {
-  StyleProp,
   StyleSheet,
-  TextStyle,
   TouchableOpacityProps,
 } from 'react-native';
 import { TouchableWithoutFeedback } from '../../../../devsupport';
@@ -21,7 +19,7 @@ import { CalendarDateInfo } from '../../type';
 
 type ChildrenProp<D> = (date: CalendarDateInfo<D>, style: StyleType) => React.ReactElement;
 
-export interface CalendarPickerCellProps<D> extends StyledComponentProps {
+export interface CalendarPickerCellProps<D> extends StyledComponentProps, TouchableOpacityProps {
   date: CalendarDateInfo<D>;
   selected?: boolean;
   bounding?: boolean;
@@ -32,8 +30,6 @@ export interface CalendarPickerCellProps<D> extends StyledComponentProps {
   onSelect?: (date: CalendarDateInfo<D>) => void;
   children: ChildrenProp<D>;
   shouldComponentUpdate?: (props: CalendarPickerCellProps<D>, nextProps: CalendarPickerCellProps<D>) => boolean;
-  style?: StyleProp<TextStyle>;
-  disabled?: boolean;
 }
 
 export type CalendarPickerCellElement<D> = React.ReactElement<CalendarPickerCellProps<D>>;
@@ -49,7 +45,7 @@ export class CalendarPickerCell<D> extends React.Component<CalendarPickerCellPro
   }
 
   private onPress = (): void => {
-    this.props.onSelect?.(this.props.date);
+    this.props.onSelect && this.props.onSelect(this.props.date);
   };
 
   private getContainerBorderRadius = (borderRadius: number): StyleType => {
@@ -75,7 +71,7 @@ export class CalendarPickerCell<D> extends React.Component<CalendarPickerCellPro
     return borderStyle;
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const {
       contentBorderWidth,
       contentBorderRadius,
@@ -110,7 +106,7 @@ export class CalendarPickerCell<D> extends React.Component<CalendarPickerCellPro
   };
 
   private renderContentElement = (source: ChildrenProp<D>, evaStyle): React.ReactElement => {
-    return source?.(this.props.date, {
+    return source && source(this.props.date, {
       container: evaStyle.contentContainer,
       text: evaStyle.contentText,
     });
@@ -124,8 +120,7 @@ export class CalendarPickerCell<D> extends React.Component<CalendarPickerCellPro
       <TouchableWithoutFeedback
         {...touchableProps}
         style={[evaStyle.container, styles.container, style]}
-        onPress={this.onPress}
-      >
+        onPress={this.onPress}>
         {this.renderContentElement(children, evaStyle)}
       </TouchableWithoutFeedback>
     );

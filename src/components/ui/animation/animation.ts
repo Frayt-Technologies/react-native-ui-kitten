@@ -24,12 +24,12 @@ export interface AnimationConfig extends Animated.AnimationConfig {
 export abstract class Animation<C extends AnimationConfig, R> {
 
   protected abstract animation: Animated.CompositeAnimation;
-  protected counter = 0;
+  protected counter: number = 0;
   protected endCallback: Animated.EndCallback;
-  protected running = false;
+  protected running: boolean = false;
   protected config: C;
 
-  protected constructor(config?: C) {
+  constructor(config?: C) {
     this.config = {
       ...DEFAULT_CONFIG,
       ...config,
@@ -38,24 +38,24 @@ export abstract class Animation<C extends AnimationConfig, R> {
 
   public abstract toProps(): R;
 
-  public start(callback?: Animated.EndCallback): void {
+  public start(callback?: Animated.EndCallback) {
     this.endCallback = callback;
     this.running = true;
 
     this.animation.start(this.onAnimationEnd);
   }
 
-  public stop(): void {
+  public stop() {
     this.running = false;
 
     this.animation.stop();
   }
 
-  public release(): void {
+  public release() {
     this.stop();
   }
 
-  protected onAnimationEnd = (result: Animated.EndResult): void => {
+  protected onAnimationEnd = (result: Animated.EndResult) => {
     this.counter += 1;
     if (this.counter === this.config.cycles) {
       this.stop();
@@ -65,7 +65,7 @@ export abstract class Animation<C extends AnimationConfig, R> {
     }
     if (!this.running) {
       this.counter = 0;
-      this.endCallback?.(result);
+      this.endCallback && this.endCallback(result);
       this.endCallback = null;
     }
   };

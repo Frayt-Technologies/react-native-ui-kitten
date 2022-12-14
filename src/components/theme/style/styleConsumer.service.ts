@@ -17,18 +17,13 @@ import {
 } from './style.service';
 import { ThemeType } from '../theme/theme.service';
 
-const SEPARATOR_MAPPING_ENTRY = '.';
-const DOC_ROOT = 'https://akveo.github.io/react-native-ui-kitten/docs';
+const SEPARATOR_MAPPING_ENTRY: string = '.';
+const DOC_ROOT: string = 'https://akveo.github.io/react-native-ui-kitten/docs';
 
 interface StyleInfo {
   appearance: string;
   variants: string[];
   states: string[];
-}
-
-interface DefaultVariants {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [index: string]: any;
 }
 
 export class StyleConsumerService {
@@ -56,7 +51,7 @@ export class StyleConsumerService {
     }
   }
 
-  public createDefaultProps(): StyledComponentProps {
+  public createDefaultProps<P extends object>(): StyledComponentProps {
     const appearance: string = this.getDefaultAppearance();
     const variants: { [key: string]: string } = this.getDefaultVariants();
     const states: { [key: string]: boolean } = this.getDefaultStates();
@@ -65,9 +60,9 @@ export class StyleConsumerService {
   }
 
   public createStyleProp<P extends object>(source: P,
-    style: StyleType,
-    theme: ThemeType,
-    interaction: Interaction[]): StyleType {
+                                           style: StyleType,
+                                           theme: ThemeType,
+                                           interaction: Interaction[]): StyleType {
 
     const styleInfo: StyleInfo = this.getStyleInfo(source, this.withValidInteraction(interaction));
     const generatedMapping: StyleType = this.getGeneratedStyleMapping(style, styleInfo);
@@ -89,7 +84,7 @@ export class StyleConsumerService {
     return StyleService.createThemedEntry(mapping, theme);
   }
 
-  private getGeneratedStyleMapping(style: StyleType, info: StyleInfo): StyleType {
+  private getGeneratedStyleMapping<P extends StyledComponentProps>(style: StyleType, info: StyleInfo): StyleType {
 
     return this.safe(style[this.name], (componentStyles: ControlThemedStyleType): ThemedStyleType => {
       const styleKeys: string[] = Object.keys(componentStyles.styles);
@@ -142,7 +137,7 @@ export class StyleConsumerService {
   }
 
   private getStyleInfo<P extends StyledComponentProps>(props: P,
-    interaction: Interaction[]): StyleInfo {
+                                                       interaction: Interaction[]): StyleInfo {
     const variantProps: Partial<P> = this.getDerivedVariants(this.meta, props);
     const stateProps: Partial<P> = this.getDerivedStates(this.meta, props);
 
@@ -167,7 +162,7 @@ export class StyleConsumerService {
     return matches[matches.length - 1];
   }
 
-  private getDefaultVariants(): DefaultVariants {
+  private getDefaultVariants(): { [key: string]: any } {
     return this.transformObject(this.meta.variantGroups, (variants, group: string): string | undefined => {
       return Object.keys(variants[group]).find((variant: string): boolean => {
 
@@ -176,7 +171,7 @@ export class StyleConsumerService {
     });
   }
 
-  private getDefaultStates(): DefaultVariants {
+  private getDefaultStates(): { [key: string]: any } {
     return this.transformObject(this.meta.states, (states, state: string): boolean | undefined => {
       const isDefault: boolean = states[state].default === true;
 
@@ -208,10 +203,9 @@ export class StyleConsumerService {
    * @param value (V extends object) - object to transform
    * @param transform - object key transformation callback
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private transformObject<V extends object>(value: V, transform: (value: V, key: string) => any): Partial<V> {
-    return Object.keys(value).reduce((acc: Partial<V>, key: string) => {
-      const nextValue = transform(value, key);
+    return Object.keys(value).reduce((acc: Partial<V>, key: string): any => {
+      const nextValue: any = transform(value, key);
 
       return nextValue ? {
         ...acc,

@@ -20,21 +20,20 @@ import { Button } from '../button/button.component';
 
 describe('@button-group: component checks', () => {
 
-  const TestButtonGroup = (props?: Partial<ButtonGroupProps>): React.ReactElement => (
+  const TestButtonGroup = (props?: Partial<ButtonGroupProps>) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}
-    >
+      theme={light}>
       <ButtonGroup {...props}>
-        <Button />
-        <Button />
+        <Button/>
+        <Button/>
       </ButtonGroup>
     </ApplicationProvider>
   );
 
   it('should render 2 buttons', () => {
     const component = render(
-      <TestButtonGroup />,
+      <TestButtonGroup/>,
     );
 
     expect(component.queryAllByType(Button).length).toEqual(2);
@@ -42,7 +41,7 @@ describe('@button-group: component checks', () => {
 
   it('should render outline buttons', () => {
     const component = render(
-      <TestButtonGroup appearance='outline' />,
+      <TestButtonGroup appearance='outline'/>,
     );
 
     const buttons = component.getAllByType(Button);
@@ -55,7 +54,7 @@ describe('@button-group: component checks', () => {
 
   it('should render ghost buttons', () => {
     const component = render(
-      <TestButtonGroup appearance='ghost' />,
+      <TestButtonGroup appearance='ghost'/>,
     );
 
     const buttons = component.getAllByType(Button);
@@ -68,7 +67,7 @@ describe('@button-group: component checks', () => {
 
   it('should render giant buttons', () => {
     const component = render(
-      <TestButtonGroup size='giant' />,
+      <TestButtonGroup size='giant'/>,
     );
 
     const buttons = component.getAllByType(Button);
@@ -81,7 +80,7 @@ describe('@button-group: component checks', () => {
 
   it('should render success buttons', () => {
     const component = render(
-      <TestButtonGroup status='success' />,
+      <TestButtonGroup status='success'/>,
     );
 
     const buttons = component.getAllByType(Button);

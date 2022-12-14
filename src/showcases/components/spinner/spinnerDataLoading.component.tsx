@@ -2,16 +2,11 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { List, ListItem, Spinner } from '@ui-kitten/components';
 
-interface IListItem {
-  title: string;
-  description: string;
-}
-
 const DATA = new Array(8).fill({
   title: 'Title for Item',
 });
 
-export const SpinnerDataLoadingShowcase = (): React.ReactElement => {
+export const SpinnerDataLoadingShowcase = () => {
 
   const [data, setData] = React.useState([]);
 
@@ -19,21 +14,21 @@ export const SpinnerDataLoadingShowcase = (): React.ReactElement => {
     setTimeout(loadData, 5000);
   }, []);
 
-  const loadData = (): void => {
+  const loadData = () => {
     setData(DATA);
   };
 
-  const renderLoading = (): React.ReactElement => (
+  const renderLoading = () => (
     <View style={styles.loading}>
-      <Spinner />
+      <Spinner/>
     </View>
   );
 
-  const renderDataItem = ({ item, index }: { item: IListItem; index: number }): React.ReactElement => (
-    <ListItem title={`${item.title} ${index + 1}`} />
+  const renderDataItem = ({ item, index }) => (
+    <ListItem title={`${item.title} ${index + 1}`}/>
   );
 
-  const renderData = (): React.ReactElement => (
+  const renderData = () => (
     <List
       data={data}
       renderItem={renderDataItem}

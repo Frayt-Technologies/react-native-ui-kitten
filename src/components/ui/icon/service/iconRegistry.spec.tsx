@@ -7,10 +7,11 @@
 import React from 'react';
 import { View } from 'react-native';
 import { IconRegistryService } from './iconRegistry.service';
+import { IconProvider } from './type';
 
-const TestIcon = {
+const TestIcon: IconProvider<any> = {
   toReactElement: (): React.ReactElement => (
-    <View />
+    <View/>
   ),
 };
 
@@ -38,11 +39,11 @@ describe('@icon-registry: service checks', () => {
 
   it('should register icon pack', () => {
     IconRegistryService.register({
-      name: 'additional-icon-pack',
-      icons: {
-        star: TestIcon,
+        name: 'additional-icon-pack',
+        icons: {
+          star: TestIcon,
+        },
       },
-    },
     );
 
     expect(IconRegistryService.getIconPack('additional-icon-pack').name).toEqual('additional-icon-pack');
@@ -50,11 +51,11 @@ describe('@icon-registry: service checks', () => {
 
   it('should register icon pack without overriding default', () => {
     IconRegistryService.register({
-      name: 'additional-icon-pack',
-      icons: {
-        home: TestIcon,
+        name: 'additional-icon-pack',
+        icons: {
+          home: TestIcon,
+        },
       },
-    },
     );
 
     expect(IconRegistryService.getIcon('home').pack).toEqual('test-icon-pack-1');

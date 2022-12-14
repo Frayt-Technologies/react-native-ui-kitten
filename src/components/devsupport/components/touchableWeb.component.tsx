@@ -44,7 +44,6 @@ export class TouchableWeb extends React.Component<TouchableWebProps> {
 
 const styles = Platform.OS === 'web' && StyleSheet.create({
   container: {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     outlineWidth: 0,
   },

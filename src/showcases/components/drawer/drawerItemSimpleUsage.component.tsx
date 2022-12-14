@@ -1,21 +1,15 @@
 import React from 'react';
-import { DrawerItem, Icon, IconElement } from '@ui-kitten/components';
+import { DrawerItem, Icon } from '@ui-kitten/components';
 
-const StarIcon = (props): IconElement => (
-  <Icon
-    {...props}
-    name='star'
-  />
+const StarIcon = (props) => (
+  <Icon {...props} name='star'/>
 );
 
-const ForwardIcon = (props): IconElement => (
-  <Icon
-    {...props}
-    name='arrow-ios-forward'
-  />
+const ForwardIcon = (props) => (
+  <Icon {...props} name='arrow-ios-forward'/>
 );
 
-export const DrawerItemSimpleUsageShowcase = (): React.ReactElement => (
+export const DrawerItemSimpleUsageShowcase = () => (
   <DrawerItem
     title='Users'
     accessoryLeft={StarIcon}

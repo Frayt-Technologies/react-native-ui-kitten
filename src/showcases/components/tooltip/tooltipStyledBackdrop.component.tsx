@@ -2,11 +2,11 @@ import React from 'react';
 import { Button, Tooltip } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 
-export const TooltipStyledBackdropShowcase = (): React.ReactElement => {
+export const TooltipStyledBackdropShowcase = () => {
 
   const [visible, setVisible] = React.useState(false);
 
-  const renderToggleButton = (): React.ReactElement => (
+  const renderToggleButton = () => (
     <Button onPress={() => setVisible(true)}>
       TOGGLE TOOLTIP
     </Button>
@@ -17,8 +17,7 @@ export const TooltipStyledBackdropShowcase = (): React.ReactElement => {
       anchor={renderToggleButton}
       visible={visible}
       backdropStyle={styles.backdrop}
-      onBackdropPress={() => setVisible(false)}
-    >
+      onBackdropPress={() => setVisible(false)}>
       Welcome to UI Kitten 😻
     </Tooltip>
   );

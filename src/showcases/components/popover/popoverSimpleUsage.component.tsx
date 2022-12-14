@@ -2,11 +2,11 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Avatar, Button, Layout, Popover, Text } from '@ui-kitten/components';
 
-export const PopoverSimpleUsageShowcase = (): React.ReactElement => {
+export const PopoverSimpleUsageShowcase = () => {
 
   const [visible, setVisible] = React.useState(false);
 
-  const renderToggleButton = (): React.ReactElement => (
+  const renderToggleButton = () => (
     <Button onPress={() => setVisible(true)}>
       TOGGLE POPOVER
     </Button>
@@ -16,13 +16,11 @@ export const PopoverSimpleUsageShowcase = (): React.ReactElement => {
     <Popover
       visible={visible}
       anchor={renderToggleButton}
-      onBackdropPress={() => setVisible(false)}
-    >
+      onBackdropPress={() => setVisible(false)}>
       <Layout style={styles.content}>
         <Avatar
           style={styles.avatar}
-          source={require('../../assets/icon.png')}
-        />
+          source={require('../../assets/icon.png')}/>
         <Text>
           Welcome to UI Kitten 😻
         </Text>

@@ -25,11 +25,10 @@ import {
 
 describe('@radio: component checks', () => {
 
-  const TestRadio = (props?: RadioProps): React.ReactElement => (
+  const TestRadio = (props?: RadioProps) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}
-    >
+      theme={light}>
       <Radio {...props} />
     </ApplicationProvider>
   );
@@ -62,9 +61,7 @@ describe('@radio: component checks', () => {
 
   it('should render text', () => {
     const component = render(
-      <TestRadio>
-I love Babel
-      </TestRadio>,
+      <TestRadio>I love Babel</TestRadio>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -73,11 +70,7 @@ I love Babel
   it('should render text from function component', () => {
     const component = render(
       <TestRadio>
-        {props => (
-          <Text {...props}>
-I love Babel
-          </Text>
-        )}
+        {props => <Text {...props}>I love Babel</Text>}
       </TestRadio>,
     );
 
@@ -87,9 +80,7 @@ I love Babel
   it('should render text from JSX component', () => {
     const component = render(
       <TestRadio>
-        <Text>
-I love Babel
-        </Text>
+        <Text>I love Babel</Text>
       </TestRadio>,
     );
 
@@ -99,7 +90,7 @@ I love Babel
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
     const component = render(
-      <TestRadio onPressIn={onPressIn} />,
+      <TestRadio onPressIn={onPressIn}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
@@ -109,7 +100,7 @@ I love Babel
   it('should call onPressOut', () => {
     const onPressOut = jest.fn();
     const component = render(
-      <TestRadio onPressOut={onPressOut} />,
+      <TestRadio onPressOut={onPressOut}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
@@ -119,7 +110,7 @@ I love Babel
     const onMouseEnter = jest.fn();
 
     const component = render(
-      <TestRadio onMouseEnter={onMouseEnter} />,
+      <TestRadio onMouseEnter={onMouseEnter}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
@@ -130,7 +121,7 @@ I love Babel
     const onMouseLeave = jest.fn();
 
     const component = render(
-      <TestRadio onMouseLeave={onMouseLeave} />,
+      <TestRadio onMouseLeave={onMouseLeave}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
@@ -141,7 +132,7 @@ I love Babel
     const onFocus = jest.fn();
 
     const component = render(
-      <TestRadio onFocus={onFocus} />,
+      <TestRadio onFocus={onFocus}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'focus');
@@ -152,7 +143,7 @@ I love Babel
     const onBlur = jest.fn();
 
     const component = render(
-      <TestRadio onBlur={onBlur} />,
+      <TestRadio onBlur={onBlur}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'blur');

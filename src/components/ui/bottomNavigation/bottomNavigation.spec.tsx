@@ -33,17 +33,16 @@ import { TabIndicator } from '../shared/tabIndicator.component';
 
 describe('@bottom-navigation-tab: component checks', () => {
 
-  const TestBottomNavigationTab = (props?: BottomNavigationTabProps): React.ReactElement => (
+  const TestBottomNavigationTab = (props?: BottomNavigationTabProps) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}
-    >
-      <BottomNavigationTab {...props} />
+      theme={light}>
+      <BottomNavigationTab {...props}/>
     </ApplicationProvider>
   );
 
   it('should render component passed to icon prop', () => {
-    const Icon = (props?: Partial<ImageProps>): React.ReactElement => (
+    const Icon = (props?: Partial<ImageProps>) => (
       <Image
         {...props}
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
@@ -51,7 +50,7 @@ describe('@bottom-navigation-tab: component checks', () => {
     );
 
     const component = render(
-      <TestBottomNavigationTab icon={Icon} />,
+      <TestBottomNavigationTab icon={Icon}/>,
     );
 
     const image = component.queryByType(Image);
@@ -62,7 +61,7 @@ describe('@bottom-navigation-tab: component checks', () => {
 
   it('should render text passed to title prop', () => {
     const component = render(
-      <TestBottomNavigationTab title='I love Babel' />,
+      <TestBottomNavigationTab title='I love Babel'/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -70,12 +69,7 @@ describe('@bottom-navigation-tab: component checks', () => {
 
   it('should render component passed to title prop', () => {
     const component = render(
-      <TestBottomNavigationTab title={props => (
-        <Text {...props}>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestBottomNavigationTab title={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -83,12 +77,7 @@ describe('@bottom-navigation-tab: component checks', () => {
 
   it('should render title from prop passed as pure JSX element', () => {
     const component = render(
-      <TestBottomNavigationTab title={(
-        <Text>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestBottomNavigationTab title={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -96,12 +85,7 @@ describe('@bottom-navigation-tab: component checks', () => {
 
   it('should render icon from prop passed as pure JSX element', () => {
     const component = render(
-      <TestBottomNavigationTab icon={(
-        <Text>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestBottomNavigationTab icon={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -111,7 +95,7 @@ describe('@bottom-navigation-tab: component checks', () => {
     const onMouseEnter = jest.fn();
 
     const component = render(
-      <TestBottomNavigationTab onMouseEnter={onMouseEnter} />,
+      <TestBottomNavigationTab onMouseEnter={onMouseEnter}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
@@ -122,7 +106,7 @@ describe('@bottom-navigation-tab: component checks', () => {
     const onMouseLeave = jest.fn();
 
     const component = render(
-      <TestBottomNavigationTab onMouseLeave={onMouseLeave} />,
+      <TestBottomNavigationTab onMouseLeave={onMouseLeave}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
@@ -132,26 +116,24 @@ describe('@bottom-navigation-tab: component checks', () => {
 
 describe('@bottom-navigation: component checks', () => {
 
-  const TestBottomNavigation = (props?: Partial<BottomNavigationProps>): React.ReactElement => {
+  const TestBottomNavigation = (props?: Partial<BottomNavigationProps>) => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
     const onSelect = (index: number): void => {
       setSelectedIndex(index);
-      props.onSelect?.(index);
+      props.onSelect && props.onSelect(index);
     };
 
     return (
       <ApplicationProvider
         mapping={mapping}
-        theme={light}
-      >
+        theme={light}>
         <BottomNavigation
           {...props}
           selectedIndex={selectedIndex}
-          onSelect={onSelect}
-        >
-          <BottomNavigationTab title='Tab 0' />
-          <BottomNavigationTab title='Tab 1' />
+          onSelect={onSelect}>
+          <BottomNavigationTab title='Tab 0'/>
+          <BottomNavigationTab title='Tab 1'/>
         </BottomNavigation>
       </ApplicationProvider>
     );
@@ -159,7 +141,7 @@ describe('@bottom-navigation: component checks', () => {
 
   it('should render 2 tabs passed to children', () => {
     const component = render(
-      <TestBottomNavigation />,
+      <TestBottomNavigation/>,
     );
 
     expect(component.queryAllByType(BottomNavigationTab).length).toEqual(2);
@@ -167,7 +149,7 @@ describe('@bottom-navigation: component checks', () => {
 
   it('should set tab selected by passing selectedIndex prop', () => {
     const component = render(
-      <TestBottomNavigation selectedIndex={1} />,
+      <TestBottomNavigation selectedIndex={1}/>,
     );
 
     expect(component.queryAllByType(BottomNavigationTab)[1].props.selected).toEqual(true);
@@ -175,17 +157,16 @@ describe('@bottom-navigation: component checks', () => {
 
   it('should not render tab indicator', () => {
     const component = render(
-      <TestBottomNavigation appearance='noIndicator' />,
+      <TestBottomNavigation appearance='noIndicator'/>,
     );
 
     expect(component.queryByType(TabIndicator)).toEqual(null);
   });
 
   it('should render tab indicator correctly', () => {
-    const styles = { width: 99, backgroundColor: 'red' };
     const component = render(
-      <TestBottomNavigation indicatorStyle={styles} />,
-    );
+      <TestBottomNavigation indicatorStyle={{width: 99, backgroundColor: 'red'}}/>,
+      );
 
     const el = component.queryByTestId('indicator body');
     const style = StyleSheet.flatten(el.props.style);
@@ -196,7 +177,7 @@ describe('@bottom-navigation: component checks', () => {
 
   it('should set tab selected by pressing it', () => {
     const component = render(
-      <TestBottomNavigation selectedIndex={1} />,
+      <TestBottomNavigation selectedIndex={1}/>,
     );
 
     fireEvent.press(component.queryAllByType(TouchableOpacity)[0]);
@@ -207,7 +188,7 @@ describe('@bottom-navigation: component checks', () => {
     const onSelect = jest.fn();
 
     const component = render(
-      <TestBottomNavigation onSelect={onSelect} />,
+      <TestBottomNavigation onSelect={onSelect}/>,
     );
 
     fireEvent.press(component.queryAllByType(TouchableOpacity)[1]);

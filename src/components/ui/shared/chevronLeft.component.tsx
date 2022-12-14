@@ -4,8 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
 import React from 'react';
 import {
   G,
@@ -22,12 +20,9 @@ export class ChevronLeft extends React.Component<SvgProps> {
 
   public render(): React.ReactElement<SvgProps> {
     return (
-      <Svg
-        {...this.props}
-        viewBox='0 0 24 24'
-      >
-        <G>
-          <G>
+      <Svg {...this.props} viewBox='0 0 24 24'>
+        <G data-name='Layer 2'>
+          <G data-name='chevron-left'>
             <Rect
               width='24'
               height='24'
@@ -35,9 +30,7 @@ export class ChevronLeft extends React.Component<SvgProps> {
               opacity='0'
             />
             <Path
-              d='M13.36 17a1 1 0 0 1-.72-.31l-3.86-4a1 1 0 0 1 0-1.4l4-4a1 1 0 1 1 1.42 1.42L10.9 12l3.18 3.3a1 1 0 0
-               1 0 1.41 1 1 0 0 1-.72.29z'
-            />
+              d='M13.36 17a1 1 0 0 1-.72-.31l-3.86-4a1 1 0 0 1 0-1.4l4-4a1 1 0 1 1 1.42 1.42L10.9 12l3.18 3.3a1 1 0 0 1 0 1.41 1 1 0 0 1-.72.29z'/>
           </G>
         </G>
       </Svg>

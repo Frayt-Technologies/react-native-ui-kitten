@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, IndexPath, MenuItem, OverflowMenu, Select, SelectItem } from '@ui-kitten/components';
+import { Button, IndexPath, Layout, MenuItem, OverflowMenu, Select, SelectItem } from '@ui-kitten/components';
 
 const placements = [
   'top',
@@ -17,35 +17,34 @@ const placements = [
   'right end',
 ];
 
-export const OverflowMenuPlacementShowcase = (): React.ReactElement => {
+export const OverflowMenuPlacementShowcase = () => {
 
   const [visible, setVisible] = React.useState(false);
   const [placementIndex, setPlacementIndex] = React.useState(new IndexPath(1, 0));
   const placement = placements[placementIndex.row];
 
-  const onPlacementSelect = (index): void => {
+  const onPlacementSelect = (index) => {
     setPlacementIndex(index);
   };
 
-  const renderToggleButton = (): React.ReactElement => (
+  const renderToggleButton = () => (
     <Button onPress={() => setVisible(true)}>
       TOGGLE MENU
     </Button>
   );
 
-  const renderPlacementItem = (title): React.ReactElement => (
-    <SelectItem title={title} />
+  const renderPlacementItem = (title) => (
+    <SelectItem title={title}/>
   );
 
   return (
-    <>
+    <React.Fragment>
 
       <Select
         placeholder='Select Placement'
         value={placement}
         selectedIndex={placementIndex}
-        onSelect={onPlacementSelect}
-      >
+        onSelect={onPlacementSelect}>
         {placements.map(renderPlacementItem)}
       </Select>
 
@@ -55,16 +54,15 @@ export const OverflowMenuPlacementShowcase = (): React.ReactElement => {
           anchor={renderToggleButton}
           visible={visible}
           placement={placement}
-          onBackdropPress={() => setVisible(false)}
-        >
-          <MenuItem title='Users' />
-          <MenuItem title='Orders' />
-          <MenuItem title='Transactions' />
+          onBackdropPress={() => setVisible(false)}>
+          <MenuItem title='Users'/>
+          <MenuItem title='Orders'/>
+          <MenuItem title='Transactions'/>
         </OverflowMenu>
 
       </View>
 
-    </>
+    </React.Fragment>
   );
 };
 

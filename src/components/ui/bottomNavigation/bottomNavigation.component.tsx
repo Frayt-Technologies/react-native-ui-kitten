@@ -140,10 +140,10 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
   };
 
   private onTabSelect = (index: number): void => {
-    this.props.onSelect?.(index);
+    this.props.onSelect && this.props.onSelect(index);
   };
 
-  private getComponentStyle = (source: StyleType): StyleType => {
+  private getComponentStyle = (source: StyleType) => {
     const { indicatorHeight, indicatorBackgroundColor, ...containerParameters } = source;
 
     return {
@@ -161,7 +161,7 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
     return (
       <TabIndicator
         key={0}
-        style={[style, indicatorStyle]}
+        style={[ style, indicatorStyle ]}
         selectedPosition={selectedIndex}
         positions={positions}
       />
@@ -192,19 +192,16 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
   };
 
   public render(): React.ReactElement<ViewProps> {
-    const { eva, style, testID } = this.props;
+    const { eva, style, ...viewProps } = this.props;
     const evaStyle = this.getComponentStyle(eva.style);
     const [indicatorElement, ...tabElements] = this.renderComponentChildren(evaStyle);
 
     return (
       <View
-        testID={testID}
-        style={styles.container}
-      >
+        {...viewProps}
+        style={[evaStyle.container, styles.container, style]}>
         {indicatorElement}
-        <View style={[evaStyle.container, styles.elementsContainer, style]}>
-          {tabElements}
-        </View>
+        {tabElements}
       </View>
     );
   }
@@ -212,9 +209,6 @@ export class BottomNavigation extends React.Component<BottomNavigationProps> {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-  },
-  elementsContainer: {
     flexDirection: 'row',
   },
   item: {

@@ -32,8 +32,7 @@ export class ThemeProvider extends React.PureComponent<ThemeProviderProps> {
 
     return (
       <ThemeContext.Provider
-        value={ThemeService.create(theme)}
-      >
+        value={ThemeService.create(theme)}>
         {children}
       </ThemeContext.Provider>
     );

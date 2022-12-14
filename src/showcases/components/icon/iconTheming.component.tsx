@@ -1,12 +1,12 @@
 import React from 'react';
-import { ImageProps, StyleSheet } from 'react-native';
-import { Button, Icon, IconElement, Layout } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
+import { Button, Icon, Layout } from '@ui-kitten/components';
 
-export const IconThemingShowcase = (): React.ReactElement => {
+export const IconThemingShowcase = () => {
 
-  const zoomIconRef = React.useRef<Icon<Partial<ImageProps>>>();
-  const pulseIconRef = React.useRef<Icon<Partial<ImageProps>>>();
-  const shakeIconRef = React.useRef<Icon<Partial<ImageProps>>>();
+  const zoomIconRef = React.useRef();
+  const pulseIconRef = React.useRef();
+  const shakeIconRef = React.useRef();
 
   React.useEffect(() => {
     zoomIconRef.current.startAnimation();
@@ -14,7 +14,7 @@ export const IconThemingShowcase = (): React.ReactElement => {
     shakeIconRef.current.startAnimation();
   }, []);
 
-  const renderZoomIcon = (props): IconElement => (
+  const renderZoomIcon = (props) => (
     <Icon
       {...props}
       ref={zoomIconRef}
@@ -24,7 +24,7 @@ export const IconThemingShowcase = (): React.ReactElement => {
     />
   );
 
-  const renderPulseIcon = (props): IconElement => (
+  const renderPulseIcon = (props) => (
     <Icon
       {...props}
       ref={pulseIconRef}
@@ -34,7 +34,7 @@ export const IconThemingShowcase = (): React.ReactElement => {
     />
   );
 
-  const renderShakeIcon = (props): IconElement => (
+  const renderShakeIcon = (props) => (
     <Icon
       {...props}
       ref={shakeIconRef}
@@ -45,31 +45,25 @@ export const IconThemingShowcase = (): React.ReactElement => {
   );
 
   return (
-    <Layout
-      style={styles.container}
-      level='1'
-    >
+    <Layout style={styles.container} level='1'>
 
       <Button
         style={styles.button}
-        accessoryLeft={renderZoomIcon}
-      >
+        accessoryLeft={renderZoomIcon}>
         ZOOM
       </Button>
 
       <Button
         appearance='outline'
         style={styles.button}
-        accessoryLeft={renderPulseIcon}
-      >
+        accessoryLeft={renderPulseIcon}>
         PULSE
       </Button>
 
       <Button
         appearance='ghost'
         style={styles.button}
-        accessoryRight={renderShakeIcon}
-      >
+        accessoryRight={renderShakeIcon}>
         SHAKE
       </Button>
 

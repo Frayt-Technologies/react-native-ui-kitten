@@ -28,20 +28,17 @@ import {
 
 describe('@button: component checks', () => {
 
-  const TestButton = (props?: ButtonProps): React.ReactElement => (
+  const TestButton = (props?: ButtonProps) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}
-    >
-      <Button {...props} />
+      theme={light}>
+      <Button {...props}/>
     </ApplicationProvider>
   );
 
   it('should render text passed to children', () => {
     const component = render(
-      <TestButton>
-I love Babel
-      </TestButton>,
+      <TestButton>I love Babel</TestButton>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -50,11 +47,7 @@ I love Babel
   it('should render component passed to children', () => {
     const component = render(
       <TestButton>
-        {props => (
-          <Text {...props}>
-            I love Babel
-          </Text>
-        )}
+        {props => <Text {...props}>I love Babel</Text>}
       </TestButton>,
     );
 
@@ -62,14 +55,14 @@ I love Babel
   });
 
   it('should render components passed to accessoryLeft or accessoryRight props', () => {
-    const AccessoryLeft = (props?: Partial<ImageProps>): React.ReactElement => (
+    const AccessoryLeft = (props?: Partial<ImageProps>) => (
       <Image
         {...props}
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
       />
     );
 
-    const AccessoryRight = (props?: Partial<ImageProps>): React.ReactElement => (
+    const AccessoryRight = (props?: Partial<ImageProps>) => (
       <Image
         {...props}
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/home.png' }}
@@ -93,27 +86,16 @@ I love Babel
   });
 
   it('should render accessory from prop as pure JSX element', () => {
-    const accessoryLeft = (
-      <Text>
-        Left accessory
-      </Text>
-    );
-    const accessoryRight = (
-      <Text>
-        Right accessory
-      </Text>
-    );
+    const accessoryLeft = <Text>Left accessory</Text>;
+    const accessoryRight = <Text>Right accessory</Text>;
 
     const component = render(
-      <TestButton
-        accessoryLeft={accessoryLeft}
-        accessoryRight={accessoryRight}
-      />
+      <TestButton accessoryLeft={accessoryLeft} accessoryRight={accessoryRight} />
     );
-
+    
     expect(component.queryByText('Left accessory')).toBeTruthy();
     expect(component.queryByText('Right accessory')).toBeTruthy();
-  });
+  })
 
   it('should render children from prop as pure JSX element', () => {
     const children = (
@@ -125,19 +107,17 @@ I love Babel
     );
 
     const component = render(
-      <TestButton>
-        {children}
-      </TestButton>
+      <TestButton children={children} />
     );
 
     expect(component.queryByText('Children component')).toBeTruthy();
-  });
+  })
 
   it('should call onPress', () => {
     const onPress = jest.fn();
 
     const component = render(
-      <TestButton onPress={onPress} />,
+      <TestButton onPress={onPress}/>,
     );
 
     fireEvent.press(component.queryByType(TouchableOpacity));
@@ -148,7 +128,7 @@ I love Babel
     const onPressIn = jest.fn();
 
     const component = render(
-      <TestButton onPressIn={onPressIn} />,
+      <TestButton onPressIn={onPressIn}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
@@ -159,7 +139,7 @@ I love Babel
     const onPressOut = jest.fn();
 
     const component = render(
-      <TestButton onPressOut={onPressOut} />,
+      <TestButton onPressOut={onPressOut}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
@@ -170,7 +150,7 @@ I love Babel
     const onMouseEnter = jest.fn();
 
     const component = render(
-      <TestButton onMouseEnter={onMouseEnter} />,
+      <TestButton onMouseEnter={onMouseEnter}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
@@ -181,7 +161,7 @@ I love Babel
     const onMouseLeave = jest.fn();
 
     const component = render(
-      <TestButton onMouseLeave={onMouseLeave} />,
+      <TestButton onMouseLeave={onMouseLeave}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
@@ -192,7 +172,7 @@ I love Babel
     const onFocus = jest.fn();
 
     const component = render(
-      <TestButton onFocus={onFocus} />,
+      <TestButton onFocus={onFocus}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'focus');
@@ -203,7 +183,7 @@ I love Babel
     const onBlur = jest.fn();
 
     const component = render(
-      <TestButton onBlur={onBlur} />,
+      <TestButton onBlur={onBlur}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'blur');

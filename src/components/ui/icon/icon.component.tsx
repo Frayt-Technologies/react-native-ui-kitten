@@ -22,7 +22,6 @@ import { AnimationConfig } from '../animation';
 
 // This is basically needed to avoid generics in required props
 // In general, could be SVGProps if using @ui-kitten/eva-icons or ImageProps if using Image.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type WrappedElementProps = any;
 
 export type IconProps<T = WrappedElementProps> = T & {
@@ -105,7 +104,7 @@ export class Icon<T> extends React.Component<IconProps<T>> {
   public render(): React.ReactElement<ViewProps> {
     const { name, pack, animation, animationConfig, ...iconProps } = this.props;
     const registeredIcon: RegisteredIcon<T> = IconRegistryService.getIcon(name, pack);
-    const iconElement = registeredIcon.icon.toReactElement(iconProps as IconProps);
+    const iconElement = registeredIcon.icon.toReactElement(iconProps as T);
 
     if (!this.animation) {
       return iconElement;

@@ -1,36 +1,26 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Icon, IconElement, IndexPath, Layout, Select, SelectItem } from '@ui-kitten/components';
+import { Icon, Layout, Select, SelectItem } from '@ui-kitten/components';
 
-const StarIcon = (props): IconElement => (
-  <Icon
-    {...props}
-    name='star'
-  />
+const StarIcon = (props) => (
+  <Icon {...props} name='star'/>
 );
 
-const ForwardIcon = (props): IconElement => (
-  <Icon
-    {...props}
-    name='arrow-ios-forward'
-  />
+const ForwardIcon = (props) => (
+  <Icon {...props} name='arrow-ios-forward'/>
 );
 
-export const SelectThemingShowcase = (): React.ReactElement => {
+export const SelectThemingShowcase = () => {
 
-  const [selectedIndex, setSelectedIndex] = React.useState<IndexPath | IndexPath[]>();
+  const [selectedIndex, setSelectedIndex] = React.useState();
 
   return (
-    <Layout
-      style={styles.container}
-      level='1'
-    >
+    <Layout style={styles.container} level='1'>
       <Select
         label='Label'
         caption='Caption'
         selectedIndex={selectedIndex}
-        onSelect={index => setSelectedIndex(index)}
-      >
+        onSelect={index => setSelectedIndex(index)}>
         <SelectItem
           title='Option 1'
           accessoryLeft={StarIcon}

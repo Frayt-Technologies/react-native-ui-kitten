@@ -14,7 +14,6 @@ import {
   View,
   ViewProps,
   ViewStyle,
-  StyleSheet,
 } from 'react-native';
 import { RTLService } from '../../devsupport';
 
@@ -31,16 +30,24 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
   static defaultProps: Partial<TabIndicatorProps> = {
     selectedPosition: 0,
   };
-  private indicatorWidth = 0;
+  private indicatorWidth: number = 0;
   private contentOffset: Animated.Value = new Animated.Value(0);
 
-  public componentDidUpdate(): void {
+  public componentDidMount() {
+    this.contentOffset.addListener(this.onContentOffsetAnimationStateChanged);
+  }
+
+  public componentDidUpdate() {
     const { selectedPosition: index } = this.props;
 
     this.scrollToIndex({
       index,
       animated: true,
     });
+  }
+
+  public componentWillUnmount() {
+    this.contentOffset.removeAllListeners();
   }
 
   /**
@@ -51,7 +58,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
    *  animated: boolean | undefined
    * }
    */
-  public scrollToIndex(params: { index: number; animated?: boolean }): void {
+  public scrollToIndex(params: { index: number, animated?: boolean }) {
     const { index, ...rest } = params;
     const offset: number = this.indicatorWidth * index;
 
@@ -66,11 +73,19 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
    *  animated: boolean | undefined
    * }
    */
-  public scrollToOffset(params: { offset: number; animated?: boolean }): void {
-    this.createOffsetAnimation(params).start();
+  public scrollToOffset(params: { offset: number, animated?: boolean }) {
+    this.createOffsetAnimation(params).start(this.onContentOffsetAnimationStateEnd);
   }
 
-  private createOffsetAnimation = (params: { offset: number; animated?: boolean }): Animated.CompositeAnimation => {
+  private onContentOffsetAnimationStateChanged = (state: { value: number }) => {
+    // no-op
+  };
+
+  private onContentOffsetAnimationStateEnd = (result: { finished: boolean }) => {
+    // no-op
+  };
+
+  private createOffsetAnimation = (params: { offset: number, animated?: boolean }): Animated.CompositeAnimation => {
     return Animated.timing(this.contentOffset, {
       toValue: RTLService.select(params.offset, -params.offset),
       duration: 200,
@@ -79,7 +94,7 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
     });
   };
 
-  private onLayout = (event: LayoutChangeEvent): void => {
+  private onLayout = (event: LayoutChangeEvent) => {
     this.indicatorWidth = event.nativeEvent.layout.width;
 
     this.scrollToOffset({
@@ -93,18 +108,18 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
 
     return {
       width: `${widthPercent}%`,
+      position: 'absolute',
 
       // @ts-ignore: RN has no types for `Animated` styles
-      transform: [{ translateX: this.contentOffset }],
+      transform: [ { translateX: this.contentOffset } ],
     };
   };
 
   private renderIndicatorLine = (style: StyleProp<ViewStyle>): React.ReactElement => {
-    const styles = [{ width: '100%', alignSelf: 'center' }, StyleSheet.flatten(style)] as StyleProp<ViewStyle>;
     return (
       <View
-        testID="indicator body"
-        style={styles}
+        testID={'indicator body'}
+        style={[ { width: '100%', alignSelf: 'center' }, style ]}
       />
     );
   };
@@ -117,9 +132,8 @@ export class TabIndicator extends React.Component<TabIndicatorProps> {
     return (
       <Animated.View
         {...viewProps}
-        style={evaStyle}
-        onLayout={this.onLayout}
-      >
+        style={[ evaStyle ]}
+        onLayout={this.onLayout}>
         {indicatorLine}
       </Animated.View>
     );

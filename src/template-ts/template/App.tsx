@@ -34,7 +34,7 @@ const HeartIcon = (props?: Partial<ImageProps>): React.ReactElement<ImageProps> 
   <Icon {...props} name='heart'/>
 );
 
-export default (): React.ReactElement => (
+export default (): React.ReactFragment => (
   <>
     <IconRegistry icons={EvaIconsPack}/>
     <ApplicationProvider {...eva} theme={eva.light}>

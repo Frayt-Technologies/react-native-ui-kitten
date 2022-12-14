@@ -4,7 +4,12 @@ export {
   ApplicationProviderElement,
 } from './application/applicationProvider.component';
 export {
+  ModalPanel,
+  ModalPanelProps,
+} from './modal/modalPanel.component';
+export {
   ModalService,
+  ModalPresentingConfig,
 } from './modal/modal.service';
 export {
   styled,

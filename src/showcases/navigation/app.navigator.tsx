@@ -11,10 +11,7 @@ import {
 } from '@ui-kitten/components';
 
 const HeartIcon = (props: ImageProps): React.ReactElement<ImageProps> => (
-  <Icon
-    {...props}
-    name='heart'
-  />
+  <Icon {...props} name='heart'/>
 );
 
 /*
@@ -22,28 +19,16 @@ const HeartIcon = (props: ImageProps): React.ReactElement<ImageProps> => (
  */
 export const AppNavigator = (): React.ReactElement => (
   <Layout style={styles.container}>
-    <Text
-      style={styles.text}
-      category='h1'
-    >
+    <Text style={styles.text} category='h1'>
       Welcome to UI Kitten 😻
     </Text>
-    <Text
-      style={styles.text}
-      category='s1'
-    >
+    <Text style={styles.text} category='s1'>
       Start with editing App.js to configure your App
     </Text>
-    <Text
-      style={styles.text}
-      appearance='hint'
-    >
+    <Text style={styles.text} appearance='hint'>
       For example, try changing theme to Dark by simply changing an import
     </Text>
-    <Button
-      style={styles.likeButton}
-      accessoryLeft={HeartIcon}
-    >
+    <Button style={styles.likeButton} accessoryLeft={HeartIcon}>
       LIKE
     </Button>
   </Layout>

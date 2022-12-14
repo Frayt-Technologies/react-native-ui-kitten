@@ -23,7 +23,7 @@ import { ApplicationProvider } from '../../theme';
 import {
   TopNavigation,
   TopNavigationProps,
-} from './topNavigation.component';
+} from './TopNavigation.component';
 import {
   TopNavigationAction,
   TopNavigationActionProps,
@@ -31,12 +31,11 @@ import {
 
 describe('@top-navigation-action: component checks', () => {
 
-  const TestTopNavigationAction = (props?: TopNavigationActionProps): React.ReactElement => (
+  const TestTopNavigationAction = (props?: TopNavigationActionProps) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}
-    >
-      <TopNavigationAction {...props} />
+      theme={light}>
+      <TopNavigationAction {...props}/>
     </ApplicationProvider>
   );
 
@@ -49,7 +48,7 @@ describe('@top-navigation-action: component checks', () => {
     );
 
     const component = render(
-      <TestTopNavigationAction icon={Icon} />,
+      <TestTopNavigationAction icon={Icon}/>,
     );
 
     const image = component.queryByType(Image);
@@ -66,7 +65,7 @@ describe('@top-navigation-action: component checks', () => {
     );
 
     const component = render(
-      <TestTopNavigationAction icon={Icon} />,
+      <TestTopNavigationAction icon={Icon}/>,
     );
 
     const image = component.queryByType(Image);
@@ -78,7 +77,7 @@ describe('@top-navigation-action: component checks', () => {
   it('should call onPress', () => {
     const onPress = jest.fn();
     const component = render(
-      <TestTopNavigationAction onPress={onPress} />,
+      <TestTopNavigationAction onPress={onPress}/>,
     );
 
     fireEvent.press(component.queryByType(TouchableOpacity));
@@ -88,7 +87,7 @@ describe('@top-navigation-action: component checks', () => {
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
     const component = render(
-      <TestTopNavigationAction onPressIn={onPressIn} />,
+      <TestTopNavigationAction onPressIn={onPressIn}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
@@ -98,7 +97,7 @@ describe('@top-navigation-action: component checks', () => {
   it('should call onPressOut', () => {
     const onPressOut = jest.fn();
     const component = render(
-      <TestTopNavigationAction onPressOut={onPressOut} />,
+      <TestTopNavigationAction onPressOut={onPressOut}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
@@ -109,7 +108,7 @@ describe('@top-navigation-action: component checks', () => {
     const onMouseEnter = jest.fn();
 
     const component = render(
-      <TestTopNavigationAction onMouseEnter={onMouseEnter} />,
+      <TestTopNavigationAction onMouseEnter={onMouseEnter}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
@@ -120,7 +119,7 @@ describe('@top-navigation-action: component checks', () => {
     const onMouseLeave = jest.fn();
 
     const component = render(
-      <TestTopNavigationAction onMouseLeave={onMouseLeave} />,
+      <TestTopNavigationAction onMouseLeave={onMouseLeave}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
@@ -131,7 +130,7 @@ describe('@top-navigation-action: component checks', () => {
     const onFocus = jest.fn();
 
     const component = render(
-      <TestTopNavigationAction onFocus={onFocus} />,
+      <TestTopNavigationAction onFocus={onFocus}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'focus');
@@ -142,7 +141,7 @@ describe('@top-navigation-action: component checks', () => {
     const onBlur = jest.fn();
 
     const component = render(
-      <TestTopNavigationAction onBlur={onBlur} />,
+      <TestTopNavigationAction onBlur={onBlur}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'blur');
@@ -153,18 +152,17 @@ describe('@top-navigation-action: component checks', () => {
 
 describe('@top-navigation: component checks', () => {
 
-  const TestTopNavigation = (props?: Partial<TopNavigationProps>): React.ReactElement => (
+  const TestTopNavigation = (props?: Partial<TopNavigationProps>) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}
-    >
-      <TopNavigation {...props} />
+      theme={light}>
+      <TopNavigation {...props}/>
     </ApplicationProvider>
   );
 
   it('should render text passed to title prop', () => {
     const component = render(
-      <TestTopNavigation title='I love Babel' />,
+      <TestTopNavigation title='I love Babel'/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -172,12 +170,7 @@ describe('@top-navigation: component checks', () => {
 
   it('should render function component passed to title prop', () => {
     const component = render(
-      <TestTopNavigation title={props => (
-        <Text {...props}>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestTopNavigation title={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -185,12 +178,7 @@ describe('@top-navigation: component checks', () => {
 
   it('should render JSX component passed to title prop', () => {
     const component = render(
-      <TestTopNavigation title={(
-        <Text>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestTopNavigation title={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -198,7 +186,7 @@ describe('@top-navigation: component checks', () => {
 
   it('should render text passed to subtitle prop', () => {
     const component = render(
-      <TestTopNavigation subtitle='I love Babel' />,
+      <TestTopNavigation subtitle='I love Babel'/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -206,12 +194,7 @@ describe('@top-navigation: component checks', () => {
 
   it('should render function component passed to subtitle prop', () => {
     const component = render(
-      <TestTopNavigation subtitle={props => (
-        <Text {...props}>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestTopNavigation subtitle={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -219,12 +202,7 @@ describe('@top-navigation: component checks', () => {
 
   it('should render JSX component passed to subtitle prop', () => {
     const component = render(
-      <TestTopNavigation subtitle={(
-        <Text>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestTopNavigation subtitle={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -232,12 +210,7 @@ describe('@top-navigation: component checks', () => {
 
   it('should render function component passed to accessoryLeft prop', () => {
     const component = render(
-      <TestTopNavigation subtitle={props => (
-        <Text {...props}>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestTopNavigation subtitle={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -245,12 +218,7 @@ describe('@top-navigation: component checks', () => {
 
   it('should render JSX component passed to accessoryLeft prop', () => {
     const component = render(
-      <TestTopNavigation subtitle={(
-        <Text>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestTopNavigation subtitle={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -258,12 +226,7 @@ describe('@top-navigation: component checks', () => {
 
   it('should render component passed to accessoryRight prop', () => {
     const component = render(
-      <TestTopNavigation subtitle={props => (
-        <Text {...props}>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestTopNavigation subtitle={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -271,12 +234,7 @@ describe('@top-navigation: component checks', () => {
 
   it('should render JSX component passed to accessoryRight prop', () => {
     const component = render(
-      <TestTopNavigation subtitle={(
-        <Text>
-          I love Babel
-        </Text>
-      )}
-      />,
+      <TestTopNavigation subtitle={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();

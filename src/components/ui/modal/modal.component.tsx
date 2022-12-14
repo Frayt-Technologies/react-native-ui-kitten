@@ -11,8 +11,8 @@ import {
   View,
   ViewProps,
   ViewStyle,
-  Modal as RNModal,
-  ModalProps as ReactNativeModalProps,
+  Dimensions,
+  NativeEventSubscription,
 } from 'react-native';
 import {
   Frame,
@@ -20,15 +20,13 @@ import {
   MeasuringElement,
   Point,
 } from '../../devsupport';
-import { ModalService } from '../../theme';
-import { Backdrop, BackdropPresentingConfig } from '@ui-kitten/components/theme/backdrop/backdrop.component';
+import {
+  ModalPresentingConfig,
+  ModalService,
+} from '../../theme';
 
-export type RNModalProps =
-  Pick<ReactNativeModalProps, 'animationType' | 'hardwareAccelerated' | 'supportedOrientations' | 'onShow'>;
-
-export interface ModalProps extends ViewProps, BackdropPresentingConfig, RNModalProps {
+export interface ModalProps extends ViewProps, ModalPresentingConfig {
   visible?: boolean;
-  shouldUseContainer?: boolean;
   children?: React.ReactNode;
 }
 
@@ -37,7 +35,6 @@ export type ModalElement = React.ReactElement<ModalProps>;
 interface State {
   contentFrame: Frame;
   forceMeasure: boolean;
-  contentPosition: Point;
 }
 
 /**
@@ -45,31 +42,17 @@ interface State {
  *
  * @extends React.Component
  *
+ * @method {() => void} show - Sets modal visible.
+ *
+ * @method {() => void} hide - Sets modal invisible.
+ *
  * @property {ReactNode} children - Component to render within the modal.
  *
  * @property {boolean} visible - Whether component is visible.
  * Defaults to false.
  *
- * @property {boolean} shouldUseContainer - Whether children should be wrapped into absolute positioned container.
- * Defaults to true.
- *
- * @property {boolean} hardwareAccelerated - Controls whether to force hardware acceleration for the underlying window.
- * Defaults to false.
- *
- * @property {'none' | 'slide' | 'fade'} animationType - Controls how the modal animates.
- * Defaults to 'none'.
- *
- * @property {Array<'portrait' | 'portrait-upside-down' | 'landscape' | 'landscape-left' | 'landscape-right'>}
- * supportedOrientations -
- * allows the modal to be rotated to any of the specified orientations.
- * On iOS, the modal is still restricted by what's specified
- * in your app's Info.plist's UISupportedInterfaceOrientations field
- *
  * @property {() => void} onBackdropPress - Called when the modal is visible and the view below it was touched.
  * Useful when needed to close the modal on outside touches.
- *
- * @property {(event: NativeSyntheticEvent<any>) => void} onShow -
- * Allows passing a function that will be called once the modal has been shown.
  *
  * @property {StyleProp<ViewStyle>} backdropStyle - Style of backdrop.
  *
@@ -84,42 +67,86 @@ interface State {
  */
 export class Modal extends React.PureComponent<ModalProps, State> {
 
-  static defaultProps: Partial<ModalProps> = {
-    shouldUseContainer: true,
-  };
-
   public state: State = {
     contentFrame: Frame.zero(),
     forceMeasure: false,
-    contentPosition: Point.outscreen(),
   };
+
+  private modalId: string;
+  private contentPosition: Point = Point.outscreen();
+  private dimensionsChangeSubscription: NativeEventSubscription | void;
 
   private get contentFlexPosition(): FlexStyle {
     const derivedStyle: ViewStyle = StyleSheet.flatten(this.props.style || {});
-    const { x: centerX, y: centerY } = this.state.contentPosition;
+    const { x: centerX, y: centerY } = this.contentPosition;
+    // @ts-ignore
     return { left: derivedStyle.left || centerX, top: derivedStyle.top || centerY };
   }
 
-  public componentDidUpdate(): void {
-    if (this.props.visible && !this.state.forceMeasure) {
-      this.setState({ forceMeasure: true });
+  private get backdropConfig(): ModalPresentingConfig {
+    const { onBackdropPress, backdropStyle } = this.props;
+    return { onBackdropPress, backdropStyle };
+  }
+
+  public show = (): void => {
+    this.modalId = ModalService.show(this.renderMeasuringContentElement(), this.backdropConfig);
+  };
+
+  public hide = (): void => {
+    this.modalId = ModalService.hide(this.modalId);
+  };
+
+  public componentDidMount(): void {
+    this.dimensionsChangeSubscription = Dimensions.addEventListener('change', this.onDimensionChange);
+    if (!this.modalId && this.props.visible) {
+      this.show();
       return;
     }
   }
 
-  public static getDerivedStateFromProps(props: ModalProps, state: State): State {
-    if (!props.visible) {
-      return {
-        ...state,
-        contentPosition: Point.outscreen(),
-      };
+  public componentDidUpdate(prevProps: ModalProps): void {
+    if (!this.modalId && this.props.visible && !this.state.forceMeasure) {
+      this.setState({ forceMeasure: true });
+      return;
     }
-    return null;
+
+    if (!this.modalId && this.props.visible) {
+      this.show();
+      return;
+    }
+
+    if (this.modalId && !this.props.visible) {
+      this.hide();
+    }
+
+    if (this.modalId && this.props.visible) {
+      ModalService.update(this.modalId, this.renderContentElement());
+    }
+  }
+
+  public componentWillUnmount(): void {
+    if (this.dimensionsChangeSubscription) {
+      this.dimensionsChangeSubscription.remove();
+    } else {
+      // for backward compatibility with RN <0.65
+      Dimensions.removeEventListener('change', this.onDimensionChange);
+    }
+    this.hide();
+  }
+
+  private onDimensionChange = (): void => {
+    if(this.props.visible) {
+      ModalService.update(this.modalId, this.renderMeasuringContentElement());
+    }
   }
 
   private onContentMeasure = (contentFrame: Frame): void => {
-    const displayFrame: Frame = contentFrame.centerOf(Frame.window());
-    this.setState({ contentPosition: displayFrame.origin });
+    this.state.contentFrame = contentFrame;
+
+    const displayFrame: Frame = this.state.contentFrame.centerOf(Frame.window());
+    this.contentPosition = displayFrame.origin;
+
+    ModalService.update(this.modalId, this.renderContentElement());
   };
 
   private renderContentElement = (): React.ReactElement<ViewProps> => {
@@ -135,35 +162,14 @@ export class Modal extends React.PureComponent<ModalProps, State> {
     return (
       <MeasureElement
         shouldUseTopInsets={ModalService.getShouldUseTopInsets}
-        onMeasure={this.onContentMeasure}
-      >
+        onMeasure={this.onContentMeasure}>
         {this.renderContentElement()}
       </MeasureElement>
     );
   };
 
   public render(): React.ReactNode {
-    return this.props.visible && (
-      <RNModal
-        transparent={true}
-        visible={this.props.visible}
-        supportedOrientations={this.props.supportedOrientations}
-        statusBarTranslucent={ModalService.getShouldUseTopInsets}
-        animationType={this.props.animationType}
-        hardwareAccelerated={this.props.hardwareAccelerated}
-        onRequestClose={this.props.onBackdropPress}
-        onShow={this.props.onShow}
-        onDismiss={this.props.onBackdropPress}
-      >
-        <Backdrop
-          visible={this.props.visible}
-          backdropStyle={this.props.backdropStyle}
-          onBackdropPress={this.props.onBackdropPress}
-        >
-          {this.props.shouldUseContainer ? this.renderMeasuringContentElement() : this.props.children}
-        </Backdrop>
-      </RNModal>
-    );
+    return null;
   }
 }
 

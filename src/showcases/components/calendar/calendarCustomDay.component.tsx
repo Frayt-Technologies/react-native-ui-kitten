@@ -2,22 +2,19 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Calendar, Text } from '@ui-kitten/components';
 
-const DayCell = ({ date }: { date: Date }, style): React.ReactElement => (
+const DayCell = ({ date }, style) => (
   <View
-    style={[styles.dayContainer, style.container]}
-  >
-    <Text style={style.text}>
-      {`${date.getDate()}`}
-    </Text>
+    style={[styles.dayContainer, style.container]}>
+    <Text style={style.text}>{`${date.getDate()}`}</Text>
     <Text style={[style.text, styles.value]}>
       {`${100 * date.getDate() + Math.pow(date.getDate(), 2)}$`}
     </Text>
   </View>
 );
 
-export const CalendarCustomDayShowcase = (): React.ReactElement => {
+export const CalendarCustomDayShowcase = () => {
 
-  const [date, setDate] = React.useState(new Date());
+  const [date, setDate] = React.useState(null);
 
   return (
     <Calendar

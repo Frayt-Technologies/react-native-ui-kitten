@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
-import { Autocomplete, AutocompleteItem, Icon, IconElement } from '@ui-kitten/components';
+import { Autocomplete, AutocompleteItem, Icon } from '@ui-kitten/components';
 
 const movies = [
   { title: 'Star Wars' },
@@ -10,35 +10,32 @@ const movies = [
   { title: 'Interstellar' },
 ];
 
-const filter = (item, query): boolean => item.title.toLowerCase().includes(query.toLowerCase());
+const filter = (item, query) => item.title.toLowerCase().includes(query.toLowerCase());
 
-const StarIcon = (props): IconElement => (
-  <Icon
-    {...props}
-    name='star'
-  />
+const StarIcon = (props) => (
+  <Icon {...props} name='star'/>
 );
 
-export const AutocompleteAccessoriesShowcase = (): React.ReactElement => {
+export const AutocompleteAccessoriesShowcase = () => {
 
   const [value, setValue] = React.useState(null);
   const [data, setData] = React.useState(movies);
 
-  const onSelect = useCallback((index): void => {
+  const onSelect = (index) => {
     setValue(data[index].title);
-  }, [data]);
+  };
 
-  const onChangeText = useCallback((query) => {
+  const onChangeText = (query) => {
     setValue(query);
     setData(movies.filter(item => filter(item, query)));
-  }, []);
+  };
 
-  const clearInput = (): void => {
+  const clearInput = () => {
     setValue('');
     setData(movies);
   };
 
-  const renderOption = (item, index): React.ReactElement => (
+  const renderOption = (item, index) => (
     <AutocompleteItem
       key={index}
       title={item.title}
@@ -46,12 +43,9 @@ export const AutocompleteAccessoriesShowcase = (): React.ReactElement => {
     />
   );
 
-  const renderCloseIcon = (props): React.ReactElement => (
+  const renderCloseIcon = (props) => (
     <TouchableWithoutFeedback onPress={clearInput}>
-      <Icon
-        {...props}
-        name='close'
-      />
+      <Icon {...props} name='close'/>
     </TouchableWithoutFeedback>
   );
 
@@ -59,11 +53,9 @@ export const AutocompleteAccessoriesShowcase = (): React.ReactElement => {
     <Autocomplete
       placeholder='Place your Text'
       value={value}
-      placement='inner top'
       accessoryRight={renderCloseIcon}
       onChangeText={onChangeText}
-      onSelect={onSelect}
-    >
+      onSelect={onSelect}>
       {data.map(renderOption)}
     </Autocomplete>
   );

@@ -16,7 +16,6 @@ const PLACEMENT_FAMILIES: string[] = [
   PopoverPlacements.TOP.rawValue,
   PopoverPlacements.LEFT.rawValue,
   PopoverPlacements.RIGHT.rawValue,
-  PopoverPlacements.INNER.rawValue,
 ];
 
 export class PopoverPlacementService {

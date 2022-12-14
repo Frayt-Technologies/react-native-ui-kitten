@@ -1,20 +1,20 @@
 import React from 'react';
-import { ImageProps, StyleSheet } from 'react-native';
-import { Button, Icon, IconElement, Layout } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
+import { Button, Icon, Layout } from '@ui-kitten/components';
 
-export const IconAnimationShowcase = (): React.ReactElement => {
+export const IconAnimationShowcase = () => {
 
-  const zoomIconRef = React.useRef<Icon<Partial<ImageProps>>>();
-  const pulseIconRef = React.useRef<Icon<Partial<ImageProps>>>();
-  const shakeIconRef = React.useRef<Icon<Partial<ImageProps>>>();
-  const infiniteAnimationIconRef = React.useRef<Icon<Partial<ImageProps>>>();
+  const zoomIconRef = React.useRef();
+  const pulseIconRef = React.useRef();
+  const shakeIconRef = React.useRef();
+  const infiniteAnimationIconRef = React.useRef();
   const noAnimationIconRef = React.useRef();
 
   React.useEffect(() => {
     infiniteAnimationIconRef.current.startAnimation();
   }, []);
 
-  const renderZoomIcon = (props): IconElement => (
+  const renderZoomIcon = (props) => (
     <Icon
       {...props}
       ref={zoomIconRef}
@@ -23,7 +23,7 @@ export const IconAnimationShowcase = (): React.ReactElement => {
     />
   );
 
-  const renderPulseIcon = (props): IconElement => (
+  const renderPulseIcon = (props) => (
     <Icon
       {...props}
       ref={pulseIconRef}
@@ -32,7 +32,7 @@ export const IconAnimationShowcase = (): React.ReactElement => {
     />
   );
 
-  const renderShakeIcon = (props): IconElement => (
+  const renderShakeIcon = (props) => (
     <Icon
       {...props}
       ref={shakeIconRef}
@@ -41,7 +41,7 @@ export const IconAnimationShowcase = (): React.ReactElement => {
     />
   );
 
-  const renderInfiniteAnimationIcon = (props): IconElement => (
+  const renderInfiniteAnimationIcon = (props) => (
     <Icon
       {...props}
       ref={infiniteAnimationIconRef}
@@ -51,7 +51,7 @@ export const IconAnimationShowcase = (): React.ReactElement => {
     />
   );
 
-  const renderNoAnimationIcon = (props): IconElement => (
+  const renderNoAnimationIcon = (props) => (
     <Icon
       {...props}
       ref={noAnimationIconRef}
@@ -61,16 +61,12 @@ export const IconAnimationShowcase = (): React.ReactElement => {
   );
 
   return (
-    <Layout
-      style={styles.container}
-      level='1'
-    >
+    <Layout style={styles.container} level='1'>
 
       <Button
         style={styles.button}
         accessoryLeft={renderZoomIcon}
-        onPress={() => zoomIconRef.current.startAnimation()}
-      >
+        onPress={() => zoomIconRef.current.startAnimation()}>
         ZOOM
       </Button>
 
@@ -79,8 +75,7 @@ export const IconAnimationShowcase = (): React.ReactElement => {
         status='success'
         style={styles.button}
         accessoryLeft={renderPulseIcon}
-        onPress={() => pulseIconRef.current.startAnimation()}
-      >
+        onPress={() => pulseIconRef.current.startAnimation()}>
         PULSE
       </Button>
 
@@ -89,8 +84,7 @@ export const IconAnimationShowcase = (): React.ReactElement => {
         status='danger'
         style={styles.button}
         accessoryLeft={renderShakeIcon}
-        onPress={() => shakeIconRef.current.startAnimation()}
-      >
+        onPress={() => shakeIconRef.current.startAnimation()}>
         SHAKE
       </Button>
 
@@ -98,8 +92,7 @@ export const IconAnimationShowcase = (): React.ReactElement => {
         appearance='ghost'
         status='info'
         style={styles.button}
-        accessoryRight={renderInfiniteAnimationIcon}
-      >
+        accessoryRight={renderInfiniteAnimationIcon}>
         INFINITE
       </Button>
 
@@ -107,8 +100,7 @@ export const IconAnimationShowcase = (): React.ReactElement => {
         appearance='ghost'
         status='warning'
         style={styles.button}
-        accessoryRight={renderNoAnimationIcon}
-      >
+        accessoryRight={renderNoAnimationIcon}>
         NO ANIMATION
       </Button>
 

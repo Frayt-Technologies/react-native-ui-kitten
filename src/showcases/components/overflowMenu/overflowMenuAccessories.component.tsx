@@ -1,54 +1,38 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Icon, IconElement, Layout, MenuItem, OverflowMenu } from '@ui-kitten/components';
+import { Button, Icon, Layout, MenuItem, OverflowMenu } from '@ui-kitten/components';
 
-const StarIcon = (props): IconElement => (
-  <Icon
-    {...props}
-    name='star'
-  />
+const StarIcon = (props) => (
+  <Icon {...props} name='star'/>
 );
 
-export const OverflowMenuAccessoriesShowcase = (): React.ReactElement => {
+export const OverflowMenuAccessoriesShowcase = () => {
 
   const [visible, setVisible] = React.useState(false);
   const [selectedIndex, setSelectedIndex] = React.useState(null);
 
-  const onSelect = (index): void => {
+  const onSelect = (index) => {
     setSelectedIndex(index);
     setVisible(false);
   };
 
-  const renderToggleButton = (): React.ReactElement => (
+  const renderToggleButton = () => (
     <Button onPress={() => setVisible(true)}>
       TOGGLE MENU
     </Button>
   );
 
   return (
-    <Layout
-      style={styles.container}
-      level='1'
-    >
+    <Layout style={styles.container} level='1'>
       <OverflowMenu
         anchor={renderToggleButton}
         visible={visible}
         selectedIndex={selectedIndex}
         onSelect={onSelect}
-        onBackdropPress={() => setVisible(false)}
-      >
-        <MenuItem
-          title='Users'
-          accessoryLeft={StarIcon}
-        />
-        <MenuItem
-          title='Orders'
-          accessoryLeft={StarIcon}
-        />
-        <MenuItem
-          title='Transactions'
-          accessoryLeft={StarIcon}
-        />
+        onBackdropPress={() => setVisible(false)}>
+        <MenuItem title='Users' accessoryLeft={StarIcon}/>
+        <MenuItem title='Orders' accessoryLeft={StarIcon}/>
+        <MenuItem title='Transactions' accessoryLeft={StarIcon}/>
       </OverflowMenu>
     </Layout>
   );

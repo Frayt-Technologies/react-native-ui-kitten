@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { GestureResponderEvent, ListRenderItemInfo } from 'react-native';
+import { ListRenderItemInfo } from 'react-native';
 import {
   ChildrenWithProps,
   IndexPath,
@@ -112,7 +112,6 @@ export class Menu extends React.Component<MenuProps> {
 
   private service: MenuService = new MenuService();
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private get data(): any[] {
     return React.Children.toArray(this.props.children || []);
   }
@@ -122,19 +121,18 @@ export class Menu extends React.Component<MenuProps> {
   }
 
   public clear = (): void => {
-    this.props.onSelect?.(null);
+    this.props.onSelect && this.props.onSelect(null);
   };
 
   private onItemPress = (descriptor: MenuItemDescriptor): void => {
-    this.props.onSelect?.(descriptor.index);
+    this.props.onSelect && this.props.onSelect(descriptor.index);
   };
 
   private isItemSelected = (descriptor: MenuItemDescriptor): boolean => {
     return descriptor.index.equals(this.props.selectedIndex);
   };
 
-  // eslint-disable-next-line max-len
-  private cloneItemWithProps = (element: React.ReactElement<MenuItemProps>, props: MenuItemProps): React.ReactElement => {
+  private cloneItemWithProps = (element: React.ReactElement, props: MenuItemProps): React.ReactElement => {
     const nestedElements = React.Children.map(element.props.children, (el: MenuItemElement, index: number) => {
       const descriptor = this.service.createDescriptorForNestedElement(props.descriptor, index);
       const selected: boolean = this.isItemSelected(descriptor);
@@ -142,9 +140,9 @@ export class Menu extends React.Component<MenuProps> {
       return this.cloneItemWithProps(el, { ...props, selected, descriptor });
     });
 
-    const onPress = (descriptor: MenuItemDescriptor, event?: GestureResponderEvent): void => {
-      element.props.onPress?.(descriptor, event);
-      props.onPress(descriptor);
+    const onPress = (event, descriptor) => {
+      element.props.onPress && element.props.onPress();
+      props.onPress(event, descriptor);
     };
 
     return React.cloneElement(element, { ...element.props, ...props, onPress }, nestedElements);

@@ -1,27 +1,23 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { EvaProp, Interaction, styled } from '@ui-kitten/components';
-
-interface Props {
-  eva?: EvaProp;
-}
+import { Interaction, styled } from '@ui-kitten/components';
 
 @styled('StyledComponent')
-class StyledComponent extends React.Component<Props> {
+class StyledComponent extends React.Component {
 
-  onPressIn = (): void => {
-    this.props.eva?.dispatch([Interaction.ACTIVE]);
+  onPressIn = () => {
+    this.props.eva.dispatch([Interaction.ACTIVE]);
   };
 
-  onPressOut = (): void => {
-    this.props.eva?.dispatch([]);
+  onPressOut = () => {
+    this.props.eva.dispatch([]);
   };
 
-  render(): React.ReactElement {
+  render() {
     return (
       <TouchableOpacity
         activeOpacity={1.0}
-        style={this.props.eva?.style}
+        style={this.props.eva.style}
         onPressIn={this.onPressIn}
         onPressOut={this.onPressOut}
       />
@@ -97,6 +93,6 @@ class StyledComponent extends React.Component<Props> {
 //   }
 // }
 
-export const StyledComponentVariantsShowcase = (): React.ReactElement => (
-  <StyledComponent />
+export const StyledComponentVariantsShowcase = () => (
+  <StyledComponent status='danger'/>
 );

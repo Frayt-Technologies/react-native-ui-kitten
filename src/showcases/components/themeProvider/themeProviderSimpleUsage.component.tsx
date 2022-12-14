@@ -1,40 +1,27 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { dark, light } from '@eva-design/eva';
-import { Card, Text, ThemeProvider } from '@ui-kitten/components';
+import { Card, Layout, Text, ThemeProvider } from '@ui-kitten/components';
 
-export const ThemeProviderSimpleUsageShowcase = (): React.ReactElement => (
-  <>
+export const ThemeProviderSimpleUsageShowcase = () => (
+  <React.Fragment>
 
     <ThemeProvider theme={light}>
-      <Card style={styles.cardStyle}>
-        <Text>
-I use light theme
-        </Text>
+      <Card style={{ marginVertical: 8 }}>
+        <Text>I use light theme</Text>
       </Card>
     </ThemeProvider>
 
     <ThemeProvider theme={dark}>
-      <Card style={styles.cardStyle}>
-        <Text>
-I use dark theme
-        </Text>
+      <Card style={{ marginVertical: 8 }}>
+        <Text>I use dark theme</Text>
       </Card>
     </ThemeProvider>
 
     <ThemeProvider theme={{ ...light, 'color-primary-default': 'red' }}>
-      <Card style={styles.cardStyle}>
-        <Text status='primary'>
-I use custom light theme
-        </Text>
+      <Card style={{ marginVertical: 8 }}>
+        <Text status='primary'>I use custom light theme</Text>
       </Card>
     </ThemeProvider>
 
-  </>
+  </React.Fragment>
 );
-
-const styles = StyleSheet.create({
-  cardStyle: {
-    marginVertical: 8,
-  },
-});

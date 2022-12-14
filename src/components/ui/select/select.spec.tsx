@@ -59,18 +59,17 @@ jest.mock('react-native', () => {
 
 describe('@select-item: component checks', () => {
 
-  const TestSelectItem = (props?: SelectItemProps): React.ReactElement => (
+  const TestSelectItem = (props?: SelectItemProps) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}
-    >
+      theme={light}>
       <SelectItem {...props} />
     </ApplicationProvider>
   );
 
   it('should render text passed to title prop', () => {
     const component = render(
-      <TestSelectItem title='I love Babel' />,
+      <TestSelectItem title='I love Babel'/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -78,12 +77,7 @@ describe('@select-item: component checks', () => {
 
   it('should render component passed to title prop', () => {
     const component = render(
-      <TestSelectItem title={props => (
-        <Text {...props}>
-I love Babel
-        </Text>
-      )}
-      />,
+      <TestSelectItem title={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -123,7 +117,7 @@ I love Babel
   it('should call onPress', () => {
     const onPress = jest.fn();
     const component = render(
-      <TestSelectItem onPress={onPress} />,
+      <TestSelectItem onPress={onPress}/>,
     );
 
     fireEvent.press(component.queryByType(TouchableOpacity));
@@ -134,7 +128,7 @@ I love Babel
   it('should call onPressIn', () => {
     const onPressIn = jest.fn();
     const component = render(
-      <TestSelectItem onPressIn={onPressIn} />,
+      <TestSelectItem onPressIn={onPressIn}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
@@ -144,7 +138,7 @@ I love Babel
   it('should call onPressOut', () => {
     const onPressOut = jest.fn();
     const component = render(
-      <TestSelectItem onPressOut={onPressOut} />,
+      <TestSelectItem onPressOut={onPressOut}/>,
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
@@ -157,30 +151,26 @@ describe('@select: component checks', () => {
   const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<Select>) => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
-    const onSelect = (index: IndexPath | IndexPath[]): void => {
+    const onSelect = (index: IndexPath | IndexPath[]) => {
       setSelectedIndex(index);
-      props.onSelect?.(index);
+      props.onSelect && props.onSelect(index);
     };
 
     return (
       <ApplicationProvider
         mapping={mapping}
-        theme={light}
-      >
+        theme={light}>
         <Select
           ref={ref}
           {...props}
           selectedIndex={selectedIndex}
-          onSelect={onSelect}
-        >
-          <SelectItem title='Option 1' />
-          <SelectItem title='Option 2' />
+          onSelect={onSelect}>
+          <SelectItem title='Option 1'/>
+          <SelectItem title='Option 2'/>
         </Select>
       </ApplicationProvider>
     );
   });
-
-  TestSelect.displayName = 'TestSelect';
 
   /*
    * In this test:
@@ -196,7 +186,7 @@ describe('@select: component checks', () => {
 
   it('should render placeholder', () => {
     const component = render(
-      <TestSelect placeholder='I love Babel' />,
+      <TestSelect placeholder='I love Babel'/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -204,12 +194,7 @@ describe('@select: component checks', () => {
 
   it('should render placeholder as function component', () => {
     const component = render(
-      <TestSelect placeholder={props => (
-        <Text {...props}>
-I love Babel
-        </Text>
-      )}
-      />,
+      <TestSelect placeholder={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -217,12 +202,7 @@ I love Babel
 
   it('should render placeholder as pure JSX component', () => {
     const component = render(
-      <TestSelect placeholder={(
-        <Text>
-I love Babel
-        </Text>
-      )}
-      />,
+      <TestSelect placeholder={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -230,7 +210,7 @@ I love Babel
 
   it('should render label', () => {
     const component = render(
-      <TestSelect label='I love Babel' />,
+      <TestSelect label='I love Babel'/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -238,12 +218,7 @@ I love Babel
 
   it('should render label as function component', () => {
     const component = render(
-      <TestSelect label={props => (
-        <Text {...props}>
-I love Babel
-        </Text>
-      )}
-      />,
+      <TestSelect label={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -251,12 +226,7 @@ I love Babel
 
   it('should render label as pure JSX component', () => {
     const component = render(
-      <TestSelect label={(
-        <Text>
-I love Babel
-        </Text>
-      )}
-      />,
+      <TestSelect label={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -264,7 +234,7 @@ I love Babel
 
   it('should render caption', () => {
     const component = render(
-      <TestSelect caption='I love Babel' />,
+      <TestSelect caption='I love Babel'/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -272,12 +242,7 @@ I love Babel
 
   it('should render caption as function component', () => {
     const component = render(
-      <TestSelect caption={props => (
-        <Text {...props}>
-I love Babel
-        </Text>
-      )}
-      />,
+      <TestSelect caption={props => <Text {...props}>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -285,12 +250,7 @@ I love Babel
 
   it('should render caption as pure JSX component', () => {
     const component = render(
-      <TestSelect caption={(
-        <Text>
-I love Babel
-        </Text>
-      )}
-      />,
+      <TestSelect caption={<Text>I love Babel</Text>}/>,
     );
 
     expect(component.queryByText('I love Babel')).toBeTruthy();
@@ -358,7 +318,7 @@ I love Babel
 
   it('should not render options when not focused', () => {
     const component = render(
-      <TestSelect />,
+      <TestSelect/>,
     );
 
     expect(component.queryByText('Option 1')).toBeFalsy();
@@ -367,7 +327,7 @@ I love Babel
 
   it('should render options when becomes focused', async () => {
     const component = render(
-      <TestSelect />,
+      <TestSelect/>,
     );
 
     fireEvent.press(touchables.findControlTouchable(component));
@@ -380,7 +340,7 @@ I love Babel
 
   it('should hide options when backdrop is pressed', async () => {
     const component = render(
-      <TestSelect />,
+      <TestSelect/>,
     );
 
     fireEvent.press(touchables.findControlTouchable(component));
@@ -402,7 +362,7 @@ I love Babel
     });
 
     const component = render(
-      <TestSelect onSelect={onSelect} />,
+      <TestSelect onSelect={onSelect}/>,
     );
 
     fireEvent.press(touchables.findControlTouchable(component));
@@ -438,7 +398,7 @@ I love Babel
 
   it('should render checkboxes when multiselect', async () => {
     const component = render(
-      <TestSelect multiSelect={true} />,
+      <TestSelect multiSelect={true}/>,
     );
 
     fireEvent.press(touchables.findControlTouchable(component));
@@ -469,7 +429,7 @@ I love Babel
     const onFocus = jest.fn();
 
     const component = render(
-      <TestSelect onFocus={onFocus} />,
+      <TestSelect onFocus={onFocus}/>,
     );
 
     fireEvent.press(touchables.findControlTouchable(component));
@@ -479,7 +439,7 @@ I love Babel
   it('should call onBlur', async () => {
     const onBlur = jest.fn();
     const component = render(
-      <TestSelect onBlur={onBlur} />,
+      <TestSelect onBlur={onBlur}/>,
     );
 
     fireEvent.press(touchables.findControlTouchable(component));
@@ -493,7 +453,7 @@ I love Babel
     const onPressIn = jest.fn();
 
     const component = render(
-      <TestSelect onPressIn={onPressIn} />,
+      <TestSelect onPressIn={onPressIn}/>,
     );
 
     fireEvent(touchables.findControlTouchable(component), 'pressIn');
@@ -504,7 +464,7 @@ I love Babel
     const onPressOut = jest.fn();
 
     const component = render(
-      <TestSelect onPressOut={onPressOut} />,
+      <TestSelect onPressOut={onPressOut}/>,
     );
 
     fireEvent(touchables.findControlTouchable(component), 'pressOut');
@@ -514,7 +474,7 @@ I love Babel
   it('should be able to call focus with ref', async () => {
     const componentRef: React.RefObject<Select> = React.createRef();
     render(
-      <TestSelect ref={componentRef} />,
+      <TestSelect ref={componentRef}/>,
     );
 
     expect(componentRef.current.focus).toBeTruthy();
@@ -524,7 +484,7 @@ I love Babel
   it('should be able to call blur with ref', async () => {
     const componentRef: React.RefObject<Select> = React.createRef();
     render(
-      <TestSelect ref={componentRef} />,
+      <TestSelect ref={componentRef}/>,
     );
 
     expect(componentRef.current.blur).toBeTruthy();
@@ -534,7 +494,7 @@ I love Babel
   it('should be able to call isFocused with ref', () => {
     const componentRef: React.RefObject<Select> = React.createRef();
     render(
-      <TestSelect ref={componentRef} />,
+      <TestSelect ref={componentRef}/>,
     );
 
     expect(componentRef.current.isFocused).toBeTruthy();
@@ -544,11 +504,31 @@ I love Babel
   it('should be able to call clear with ref', () => {
     const componentRef: React.RefObject<Select> = React.createRef();
     render(
-      <TestSelect ref={componentRef} />,
+      <TestSelect ref={componentRef}/>,
     );
 
     expect(componentRef.current.clear).toBeTruthy();
     componentRef.current.clear();
+  });
+
+  it('should be able to call show with ref', () => {
+    const componentRef: React.RefObject<Select> = React.createRef();
+    render(
+      <TestSelect ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.show).toBeTruthy();
+    componentRef.current.show();
+  });
+
+  it('should be able to call hide with ref', async () => {
+    const componentRef: React.RefObject<Select> = React.createRef();
+    render(
+      <TestSelect ref={componentRef}/>,
+    );
+
+    expect(componentRef.current.hide).toBeTruthy();
+    componentRef.current.hide();
   });
 
 });
@@ -558,36 +538,32 @@ describe('@select: component checks with groups', () => {
   const TestSelect = React.forwardRef((props: Partial<SelectProps>, ref: React.Ref<Select>) => {
     const [selectedIndex, setSelectedIndex] = React.useState(props.selectedIndex);
 
-    const onSelect = (index: IndexPath | IndexPath[]): void => {
+    const onSelect = (index: IndexPath | IndexPath[]) => {
       setSelectedIndex(index);
-      props.onSelect?.(index);
+      props.onSelect && props.onSelect(index);
     };
 
     return (
       <ApplicationProvider
         mapping={mapping}
-        theme={light}
-      >
+        theme={light}>
         <Select
           ref={ref}
           {...props}
           selectedIndex={selectedIndex}
-          onSelect={onSelect}
-        >
+          onSelect={onSelect}>
           <SelectGroup title='Group 1'>
-            <SelectItem title='Option 1.1' />
-            <SelectItem title='Option 1.2' />
+            <SelectItem title='Option 1.1'/>
+            <SelectItem title='Option 1.2'/>
           </SelectGroup>
           <SelectGroup title='Group 2'>
-            <SelectItem title='Option 2.1' />
-            <SelectItem title='Option 2.2' />
+            <SelectItem title='Option 2.1'/>
+            <SelectItem title='Option 2.2'/>
           </SelectGroup>
         </Select>
       </ApplicationProvider>
     );
   });
-
-  TestSelect.displayName = 'TestSelect';
 
   const touchables = {
     findControlTouchable: (api: RenderAPI) => api.queryAllByType(TouchableOpacity)[0],
@@ -600,7 +576,7 @@ describe('@select: component checks with groups', () => {
     });
 
     const component = render(
-      <TestSelect onSelect={onSelect} />,
+      <TestSelect onSelect={onSelect}/>,
     );
 
     fireEvent.press(touchables.findControlTouchable(component));

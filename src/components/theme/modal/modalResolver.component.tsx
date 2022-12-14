@@ -13,25 +13,21 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
+import { ModalPresentingConfig } from './modal.service';
 
 type ChildElement = React.ReactElement;
-type ChildrenProp = ChildElement | ChildElement[] | React.ReactNode;
+type ChildrenProp = ChildElement | ChildElement[];
 
-export interface BackdropPresentingConfig {
-  backdropStyle?: StyleProp<ViewStyle>;
-  onBackdropPress?: () => void;
-}
-
-export interface BackdropProps extends ViewProps, BackdropPresentingConfig {
+export interface ModalResolverProps extends ViewProps, ModalPresentingConfig {
   visible: boolean;
   children: ChildrenProp;
   backdropStyle: StyleProp<ViewStyle>;
   onBackdropPress: () => void;
 }
 
-export class Backdrop extends React.Component<BackdropProps> {
+export class ModalResolver extends React.Component<ModalResolverProps> {
 
-  static defaultProps: Partial<BackdropProps> = {
+  static defaultProps: Partial<ModalResolverProps> = {
     visible: false,
   };
 
@@ -53,7 +49,6 @@ export class Backdrop extends React.Component<BackdropProps> {
         <TouchableOpacity
           style={[StyleSheet.absoluteFill, this.props.backdropStyle]}
           activeOpacity={1.0}
-          testID='@backdrop'
           onPress={this.props.onBackdropPress}
         />
         {componentChildren}

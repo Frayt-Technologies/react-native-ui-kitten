@@ -2,15 +2,12 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Input, Layout } from '@ui-kitten/components';
 
-export const InputStatesShowcase = (): React.ReactElement => {
+export const InputStatesShowcase = () => {
 
   const [value, setValue] = React.useState('');
 
   return (
-    <Layout
-      style={styles.container}
-      level='1'
-    >
+    <Layout style={styles.container} level='1'>
 
       <Input
         style={styles.input}

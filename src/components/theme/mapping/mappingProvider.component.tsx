@@ -14,8 +14,7 @@ export class MappingProvider extends React.PureComponent<MappingProviderProps> {
 
     return (
       <MappingContext.Provider
-        value={styles}
-      >
+        value={styles}>
         {children}
       </MappingContext.Provider>
     );

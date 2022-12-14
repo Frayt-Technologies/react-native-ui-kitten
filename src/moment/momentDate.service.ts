@@ -13,18 +13,18 @@ import moment, { Moment } from 'moment';
 export class MomentDateService extends DateService<Moment> {
 
   protected localeData: {
-    firstDayOfWeek: number;
-    defaultFormat: string;
-    months: { [key: string]: string[] };
-    days: { [key: string]: string[] };
+    firstDayOfWeek: number,
+    defaultFormat: string,
+    months: { [key: string]: string[] },
+    days: { [key: string]: string[] },
   };
 
-  constructor(locale = 'en') {
+  constructor(locale: string = 'en') {
     super();
     this.setLocale(locale);
   }
 
-  public setLocale(locale: string): void {
+  public setLocale(locale: string) {
     super.setLocale(locale);
     this.setMomentLocaleData(locale);
   }
@@ -145,7 +145,7 @@ export class MomentDateService extends DateService<Moment> {
     return 'moment';
   }
 
-  protected setMomentLocaleData(locale: string): void {
+  protected setMomentLocaleData(locale: string) {
     const momentLocaleData = moment.localeData(locale);
 
     this.localeData = {

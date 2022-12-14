@@ -2,25 +2,15 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Avatar, Button, Divider, Text } from '@ui-kitten/components';
 
-export const DividerSimpleUsageShowcase = (): React.ReactElement => (
-  <>
+export const DividerSimpleUsageShowcase = () => (
+  <React.Fragment>
     <View style={styles.details}>
-      <Avatar
-        size='giant'
-        source={require('../../assets/icon.png')}
-      />
-      <Text
-        style={styles.title}
-        category='h6'
-      >
-UI Kitten
-      </Text>
+      <Avatar size='giant' source={require('../../assets/icon.png')}/>
+      <Text style={styles.title} category='h6'>UI Kitten</Text>
     </View>
-    <Divider />
-    <Button style={styles.installButton}>
-INSTALL
-    </Button>
-  </>
+    <Divider/>
+    <Button style={styles.installButton}>INSTALL</Button>
+  </React.Fragment>
 );
 
 const styles = StyleSheet.create({

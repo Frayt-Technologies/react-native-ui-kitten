@@ -22,11 +22,10 @@ import {
 
 describe('@avatar: component checks', () => {
 
-  const TestAvatar = (props: Partial<AvatarProps>): React.ReactElement => (
+  const TestAvatar = (props: Partial<AvatarProps>) => (
     <ApplicationProvider
       mapping={mapping}
-      theme={light}
-    >
+      theme={light}>
       <Avatar
         source={{ uri: 'https://akveo.github.io/eva-icons/fill/png/128/star.png' }}
         {...props}
@@ -36,7 +35,7 @@ describe('@avatar: component checks', () => {
 
   it('should render image', () => {
     const component = render(
-      <TestAvatar />,
+      <TestAvatar/>,
     );
 
     const avatar = component.queryByType(Image);
@@ -47,7 +46,7 @@ describe('@avatar: component checks', () => {
 
   it('should be round', () => {
     const component = render(
-      <TestAvatar shape='round' />,
+      <TestAvatar shape='round'/>,
     );
 
     const avatar = component.queryByType(Image);
@@ -58,7 +57,7 @@ describe('@avatar: component checks', () => {
 
   it('should be rounded', () => {
     const component = render(
-      <TestAvatar shape='rounded' />,
+      <TestAvatar shape='rounded'/>,
     );
 
     const avatar = component.queryByType(Image);
@@ -69,7 +68,7 @@ describe('@avatar: component checks', () => {
 
   it('should be square', () => {
     const component = render(
-      <TestAvatar shape='square' />,
+      <TestAvatar shape='square'/>,
     );
 
     const avatar = component.queryByType(Image);
