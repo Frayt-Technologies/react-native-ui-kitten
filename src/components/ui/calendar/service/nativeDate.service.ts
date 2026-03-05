@@ -198,23 +198,23 @@ export class NativeDateService extends DateService<Date> {
 
   private getFechaDayNames(style: TranslationWidth): string[] {
     switch (style) {
-      case TranslationWidth.SHORT:
-        return this.i18nSettings.dayNamesShort;
-      case TranslationWidth.LONG:
-        return this.i18nSettings.dayNames;
-      default:
-        return;
+    case TranslationWidth.SHORT:
+      return this.i18nSettings.dayNamesShort;
+    case TranslationWidth.LONG:
+      return this.i18nSettings.dayNames;
+    default:
+      return;
     }
   }
 
   private getFechaMonthNames(style: TranslationWidth): string[] {
     switch (style) {
-      case TranslationWidth.SHORT:
-        return this.i18nSettings.monthNamesShort;
-      case TranslationWidth.LONG:
-        return this.i18nSettings.monthNames;
-      default:
-        return;
+    case TranslationWidth.SHORT:
+      return this.i18nSettings.monthNamesShort;
+    case TranslationWidth.LONG:
+      return this.i18nSettings.monthNames;
+    default:
+      return;
     }
   }
 

@@ -17,14 +17,14 @@ export class RangeDateService<D> {
 
   public createRange(range: CalendarRange<D>, date: D): CalendarRange<D> {
     switch (true) {
-      case (!range.startDate && !range.endDate):
-        return { startDate: date, endDate: null };
-      case (range.startDate && !range.endDate):
-        return this.createRangeForStart(range, date);
-      case (range.startDate !== null && range.endDate !== null):
-        return this.createRangeForStartEnd(date);
-      default:
-        return range;
+    case (!range.startDate && !range.endDate):
+      return { startDate: date, endDate: null };
+    case (range.startDate && !range.endDate):
+      return this.createRangeForStart(range, date);
+    case (range.startDate !== null && range.endDate !== null):
+      return this.createRangeForStartEnd(date);
+    default:
+      return range;
     }
   }
 

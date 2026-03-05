@@ -25,7 +25,7 @@ import {
   RTLService,
 } from '../../devsupport';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface ViewPagerProps<ChildrenProps = {}> extends ViewProps {
   children?: ChildrenWithProps<ChildrenProps>;
   selectedIndex?: number;
@@ -69,7 +69,7 @@ export type ViewPagerElement = React.ReactElement<ViewPagerProps>;
  * @overview-example ViewPagerLazyLoading
  * Each view can be loaded lazily by using `shouldLoadComponent` property.
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export class ViewPager<ChildrenProps = {}> extends React.Component<ViewPagerProps<ChildrenProps>>
   implements PanResponderCallbacks {
 

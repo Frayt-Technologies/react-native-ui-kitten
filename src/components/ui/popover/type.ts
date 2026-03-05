@@ -108,22 +108,22 @@ export class Offsets {
 
   private static parseString(rawValue: string, fallback?: Offset): Offset | undefined {
     switch (rawValue) {
-      case Offsets.MARGIN.rawValue:
-        return Offsets.MARGIN;
-      case Offsets.MARGIN_HORIZONTAL.rawValue:
-        return Offsets.MARGIN_HORIZONTAL;
-      case Offsets.MARGIN_VERTICAL.rawValue:
-        return Offsets.MARGIN_VERTICAL;
-      case Offsets.MARGIN_LEFT.rawValue:
-        return Offsets.MARGIN_LEFT;
-      case Offsets.MARGIN_TOP.rawValue:
-        return Offsets.MARGIN_TOP;
-      case Offsets.MARGIN_RIGHT.rawValue:
-        return Offsets.MARGIN_RIGHT;
-      case Offsets.MARGIN_BOTTOM.rawValue:
-        return Offsets.MARGIN_BOTTOM;
-      default:
-        return fallback;
+    case Offsets.MARGIN.rawValue:
+      return Offsets.MARGIN;
+    case Offsets.MARGIN_HORIZONTAL.rawValue:
+      return Offsets.MARGIN_HORIZONTAL;
+    case Offsets.MARGIN_VERTICAL.rawValue:
+      return Offsets.MARGIN_VERTICAL;
+    case Offsets.MARGIN_LEFT.rawValue:
+      return Offsets.MARGIN_LEFT;
+    case Offsets.MARGIN_TOP.rawValue:
+      return Offsets.MARGIN_TOP;
+    case Offsets.MARGIN_RIGHT.rawValue:
+      return Offsets.MARGIN_RIGHT;
+    case Offsets.MARGIN_BOTTOM.rawValue:
+      return Offsets.MARGIN_BOTTOM;
+    default:
+      return fallback;
     }
   }
 
@@ -778,38 +778,38 @@ export class PopoverPlacements {
 
   private static parseString(rawValue: string, fallback?: PopoverPlacement): PopoverPlacement | undefined {
     switch (rawValue) {
-      case PopoverPlacements.LEFT.rawValue:
-        return PopoverPlacements.LEFT;
-      case PopoverPlacements.TOP.rawValue:
-        return PopoverPlacements.TOP;
-      case PopoverPlacements.RIGHT.rawValue:
-        return PopoverPlacements.RIGHT;
-      case PopoverPlacements.BOTTOM.rawValue:
-        return PopoverPlacements.BOTTOM;
-      case PopoverPlacements.LEFT_START.rawValue:
-        return PopoverPlacements.LEFT_START;
-      case PopoverPlacements.LEFT_END.rawValue:
-        return PopoverPlacements.LEFT_END;
-      case PopoverPlacements.TOP_START.rawValue:
-        return PopoverPlacements.TOP_START;
-      case PopoverPlacements.TOP_END.rawValue:
-        return PopoverPlacements.TOP_END;
-      case PopoverPlacements.RIGHT_START.rawValue:
-        return PopoverPlacements.RIGHT_START;
-      case PopoverPlacements.RIGHT_END.rawValue:
-        return PopoverPlacements.RIGHT_END;
-      case PopoverPlacements.BOTTOM_START.rawValue:
-        return PopoverPlacements.BOTTOM_START;
-      case PopoverPlacements.BOTTOM_END.rawValue:
-        return PopoverPlacements.BOTTOM_END;
-      case PopoverPlacements.INNER.rawValue:
-        return PopoverPlacements.INNER;
-      case PopoverPlacements.INNER_TOP.rawValue:
-        return PopoverPlacements.INNER_TOP;
-      case PopoverPlacements.INNER_BOTTOM.rawValue:
-        return PopoverPlacements.INNER_BOTTOM;
-      default:
-        return fallback;
+    case PopoverPlacements.LEFT.rawValue:
+      return PopoverPlacements.LEFT;
+    case PopoverPlacements.TOP.rawValue:
+      return PopoverPlacements.TOP;
+    case PopoverPlacements.RIGHT.rawValue:
+      return PopoverPlacements.RIGHT;
+    case PopoverPlacements.BOTTOM.rawValue:
+      return PopoverPlacements.BOTTOM;
+    case PopoverPlacements.LEFT_START.rawValue:
+      return PopoverPlacements.LEFT_START;
+    case PopoverPlacements.LEFT_END.rawValue:
+      return PopoverPlacements.LEFT_END;
+    case PopoverPlacements.TOP_START.rawValue:
+      return PopoverPlacements.TOP_START;
+    case PopoverPlacements.TOP_END.rawValue:
+      return PopoverPlacements.TOP_END;
+    case PopoverPlacements.RIGHT_START.rawValue:
+      return PopoverPlacements.RIGHT_START;
+    case PopoverPlacements.RIGHT_END.rawValue:
+      return PopoverPlacements.RIGHT_END;
+    case PopoverPlacements.BOTTOM_START.rawValue:
+      return PopoverPlacements.BOTTOM_START;
+    case PopoverPlacements.BOTTOM_END.rawValue:
+      return PopoverPlacements.BOTTOM_END;
+    case PopoverPlacements.INNER.rawValue:
+      return PopoverPlacements.INNER;
+    case PopoverPlacements.INNER_TOP.rawValue:
+      return PopoverPlacements.INNER_TOP;
+    case PopoverPlacements.INNER_BOTTOM.rawValue:
+      return PopoverPlacements.INNER_BOTTOM;
+    default:
+      return fallback;
     }
   }
 
