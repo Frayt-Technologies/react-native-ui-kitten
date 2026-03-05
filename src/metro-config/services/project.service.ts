@@ -8,7 +8,7 @@ import LogService from './log.service';
  * - /metro.config.js
  * - /package.json
  */
-const PROJECT_PATH: string = Path.resolve(__dirname, '../../../../');
+const PROJECT_PATH: string = process.cwd();
 
 // eslint-disable-next-line no-restricted-syntax
 export default class ProjectService {
