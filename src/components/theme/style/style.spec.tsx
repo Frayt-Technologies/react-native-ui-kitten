@@ -402,7 +402,7 @@ describe('@useStyleSheet: rendering performance check', () => {
 
     const component = render(<Component />);
     fireEvent.press(component.getByTestId(styleTouchableTestId));
-    expect(stylesFuncMock).toBeCalledTimes(1);
+    expect(stylesFuncMock).toHaveBeenCalledTimes(1);
   });
 
   it('useStyleSheet should not be called with every render when memoized', async () => {
@@ -432,8 +432,8 @@ describe('@useStyleSheet: rendering performance check', () => {
     };
 
     const component = render(<Component />);
-    expect(stylesFuncMock).toBeCalledTimes(1);
+    expect(stylesFuncMock).toHaveBeenCalledTimes(1);
     fireEvent.press(component.getByTestId(styleTouchableTestId));
-    expect(stylesFuncMock).toBeCalledTimes(1);
+    expect(stylesFuncMock).toHaveBeenCalledTimes(1);
   });
 });

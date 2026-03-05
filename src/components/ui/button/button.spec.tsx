@@ -141,7 +141,7 @@ I love Babel
     );
 
     fireEvent.press(component.queryByType(TouchableOpacity));
-    expect(onPress).toBeCalled();
+    expect(onPress).toHaveBeenCalled();
   });
 
   it('should call onPressIn', () => {
@@ -152,7 +152,7 @@ I love Babel
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
-    expect(onPressIn).toBeCalled();
+    expect(onPressIn).toHaveBeenCalled();
   });
 
   it('should call onPressOut', () => {
@@ -163,7 +163,7 @@ I love Babel
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
-    expect(onPressOut).toBeCalled();
+    expect(onPressOut).toHaveBeenCalled();
   });
 
   it('should call onMouseEnter', () => {
@@ -174,7 +174,7 @@ I love Babel
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
-    expect(onMouseEnter).toBeCalled();
+    expect(onMouseEnter).toHaveBeenCalled();
   });
 
   it('should call onMouseLeave', () => {
@@ -185,7 +185,7 @@ I love Babel
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
-    expect(onMouseLeave).toBeCalled();
+    expect(onMouseLeave).toHaveBeenCalled();
   });
 
   it('should call onFocus', () => {
@@ -196,7 +196,7 @@ I love Babel
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'focus');
-    expect(onFocus).toBeCalled();
+    expect(onFocus).toHaveBeenCalled();
   });
 
   it('should call onBlur', () => {
@@ -207,7 +207,7 @@ I love Babel
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'blur');
-    expect(onBlur).toBeCalled();
+    expect(onBlur).toHaveBeenCalled();
   });
 
 });

@@ -146,7 +146,7 @@ I love Babel
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
-    expect(onPressIn).toBeCalled();
+    expect(onPressIn).toHaveBeenCalled();
   });
 
   it('should call onPressOut', () => {
@@ -156,7 +156,7 @@ I love Babel
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
-    expect(onPressOut).toBeCalled();
+    expect(onPressOut).toHaveBeenCalled();
   });
 });
 
@@ -260,7 +260,7 @@ describe('@autocomplete: component checks', () => {
     );
 
     fireEvent.changeText(component.queryByType(TextInput), 'I love Babel');
-    expect(onChangeText).toBeCalledWith('I love Babel');
+    expect(onChangeText).toHaveBeenCalledWith('I love Babel');
   });
 
   it('should update options list on text change', async () => {
@@ -288,7 +288,7 @@ describe('@autocomplete: component checks', () => {
     await waitForElement(() => null);
 
     fireEvent.press(component.queryAllByType(TouchableWithoutFeedback)[3]);
-    expect(onSelect).toBeCalledWith(1);
+    expect(onSelect).toHaveBeenCalledWith(1);
   });
 
   it('should hide options when backdrop is pressed', async () => {
@@ -316,7 +316,7 @@ describe('@autocomplete: component checks', () => {
     );
 
     fireEvent(component.queryByType(TextInput), 'focus');
-    expect(onFocus).toBeCalled();
+    expect(onFocus).toHaveBeenCalled();
   });
 
   it('should call onBlur', async () => {
@@ -326,7 +326,7 @@ describe('@autocomplete: component checks', () => {
     );
 
     fireEvent(component.queryByType(TextInput), 'blur');
-    expect(onBlur).toBeCalled();
+    expect(onBlur).toHaveBeenCalled();
   });
 
   it('should be able to call focus with ref', async () => {

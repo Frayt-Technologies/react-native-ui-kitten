@@ -354,7 +354,7 @@ describe('@range-datepicker: component checks', () => {
     fireEvent.press(touchables.findInputTouchable(component));
 
     await waitForElement(() => null);
-    expect(onFocus).toBeCalled();
+    expect(onFocus).toHaveBeenCalled();
   });
 
   it('should call onBlur when calendar becomes invisible', async () => {
@@ -368,7 +368,7 @@ describe('@range-datepicker: component checks', () => {
     const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
     fireEvent.press(backdrop);
 
-    expect(onBlur).toBeCalled();
+    expect(onBlur).toHaveBeenCalled();
   });
 
   it('should show calendar by calling `focus` with ref', async () => {
@@ -433,7 +433,7 @@ describe('@range-datepicker: component checks', () => {
     componentRef.current.clear();
     await waitForElement(() => null);
 
-    expect(onSelect).toBeCalledWith({});
+    expect(onSelect).toHaveBeenCalledWith({});
   });
 
   it('should call onPress', async () => {
@@ -443,7 +443,7 @@ describe('@range-datepicker: component checks', () => {
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
-    expect(onPress).toBeCalled();
+    expect(onPress).toHaveBeenCalled();
   });
 
   it('should call onPressIn', async () => {
@@ -453,7 +453,7 @@ describe('@range-datepicker: component checks', () => {
     );
 
     fireEvent(touchables.findInputTouchable(component), 'pressIn');
-    expect(onPressIn).toBeCalled();
+    expect(onPressIn).toHaveBeenCalled();
   });
 
   it('should call onPressOut', async () => {
@@ -463,7 +463,7 @@ describe('@range-datepicker: component checks', () => {
     );
 
     fireEvent(touchables.findInputTouchable(component), 'pressOut');
-    expect(onPressOut).toBeCalled();
+    expect(onPressOut).toHaveBeenCalled();
   });
 
   it('should show startDate of the selected range on load provided by range prop', () => {
@@ -577,7 +577,7 @@ describe('@range-datepicker: component checks', () => {
     const leftArrow = component.queryByTestId('@arrow/left');
     fireEvent.press(leftArrow);
 
-    expect(onVisibleDateChange).toBeCalled();
+    expect(onVisibleDateChange).toHaveBeenCalled();
   });
 
   it('should render custom right arrow', () => {
@@ -611,7 +611,7 @@ describe('@range-datepicker: component checks', () => {
     const leftArrow = component.queryByTestId('@arrow/right');
     fireEvent.press(leftArrow);
 
-    expect(onVisibleDateChange).toBeCalled();
+    expect(onVisibleDateChange).toHaveBeenCalled();
   });
 
 });

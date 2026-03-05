@@ -131,7 +131,7 @@ describe('@card: component checks', () => {
     );
 
     fireEvent.press(component.queryByType(TouchableOpacity));
-    expect(onPress).toBeCalled();
+    expect(onPress).toHaveBeenCalled();
   });
 
   it('should call onPressIn', () => {
@@ -141,7 +141,7 @@ describe('@card: component checks', () => {
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
-    expect(onPressIn).toBeCalled();
+    expect(onPressIn).toHaveBeenCalled();
   });
 
   it('should call onPressOut', () => {
@@ -151,7 +151,7 @@ describe('@card: component checks', () => {
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
-    expect(onPressOut).toBeCalled();
+    expect(onPressOut).toHaveBeenCalled();
   });
 });
 

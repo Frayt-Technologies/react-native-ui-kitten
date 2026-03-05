@@ -299,9 +299,9 @@ describe('@useTheme: rendering performance check', () => {
     };
 
     const component = render(<Component />);
-    expect(themeFuncMock).toBeCalledTimes(1);
+    expect(themeFuncMock).toHaveBeenCalledTimes(1);
     fireEvent.press(component.getByTestId(styleTouchableTestId));
-    expect(themeFuncMock).toBeCalledTimes(2);
+    expect(themeFuncMock).toHaveBeenCalledTimes(2);
   });
 
   it('not changing theme value state should not force component to render', async () => {
@@ -334,8 +334,8 @@ describe('@useTheme: rendering performance check', () => {
     };
 
     const component = render(<Component />);
-    expect(themeFuncMock).toBeCalledTimes(1);
+    expect(themeFuncMock).toHaveBeenCalledTimes(1);
     fireEvent.press(component.getByTestId(styleTouchableTestId));
-    expect(themeFuncMock).toBeCalledTimes(1);
+    expect(themeFuncMock).toHaveBeenCalledTimes(1);
   });
 });

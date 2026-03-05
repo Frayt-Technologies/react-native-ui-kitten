@@ -109,7 +109,7 @@ describe('@icon: component checks', () => {
       render(
         <Icon name='not-registered-icon' />,
       );
-    }).toThrowError();
+    }).toThrow();
 
     expect(() => {
       render(
@@ -118,7 +118,7 @@ describe('@icon: component checks', () => {
           pack='additional-icon-pack'
         />,
       );
-    }).toThrowError();
+    }).toThrow();
   });
 
   it('should throw while rendering icon from not registered pack', () => {
@@ -129,7 +129,7 @@ describe('@icon: component checks', () => {
           pack='not-registered-pack'
         />,
       );
-    }).toThrowError();
+    }).toThrow();
   });
 
   it('should render without an animation if animation is null', () => {

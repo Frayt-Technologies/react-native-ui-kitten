@@ -135,7 +135,7 @@ describe('@popover: component checks', () => {
       fireEvent.press(touchables.findBackdropTouchable(component));
     });
 
-    expect(onBackdropPress).toBeCalled();
+    expect(onBackdropPress).toHaveBeenCalled();
   });
 
   it('should style backdrop with backdropStyle prop', async () => {

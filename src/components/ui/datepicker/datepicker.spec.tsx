@@ -267,7 +267,7 @@ describe('@datepicker: component checks', () => {
     const dateTouchable = await waitForElement(() => component.queryAllByText('7')[0]);
 
     fireEvent.press(dateTouchable);
-    expect(onSelect).toBeCalledWith(new Date(today.getFullYear(), today.getMonth(), 7));
+    expect(onSelect).toHaveBeenCalledWith(new Date(today.getFullYear(), today.getMonth(), 7));
   });
 
   it('should render element provided with renderDay prop', async () => {
@@ -361,7 +361,7 @@ describe('@datepicker: component checks', () => {
 
     await waitForElement(() => null);
 
-    expect(onFocus).toBeCalled();
+    expect(onFocus).toHaveBeenCalled();
   });
 
   it('should call onBlur when calendar becomes invisible', async () => {
@@ -375,7 +375,7 @@ describe('@datepicker: component checks', () => {
     const backdrop = await waitForElement(() => touchables.findBackdropTouchable(component));
     fireEvent.press(backdrop);
 
-    expect(onBlur).toBeCalled();
+    expect(onBlur).toHaveBeenCalled();
   });
 
   it('should show calendar by calling `focus` with ref', async () => {
@@ -444,7 +444,7 @@ describe('@datepicker: component checks', () => {
     componentRef.current.clear();
     await waitForElement(() => null);
 
-    expect(onSelect).toBeCalledWith(null);
+    expect(onSelect).toHaveBeenCalledWith(null);
   });
 
   it('should call onPress', async () => {
@@ -454,7 +454,7 @@ describe('@datepicker: component checks', () => {
     );
 
     fireEvent.press(touchables.findInputTouchable(component));
-    expect(onPress).toBeCalled();
+    expect(onPress).toHaveBeenCalled();
   });
 
   it('should call onPressIn', async () => {
@@ -464,7 +464,7 @@ describe('@datepicker: component checks', () => {
     );
 
     fireEvent(touchables.findInputTouchable(component), 'pressIn');
-    expect(onPressIn).toBeCalled();
+    expect(onPressIn).toHaveBeenCalled();
   });
 
   it('should call onPressOut', async () => {
@@ -474,7 +474,7 @@ describe('@datepicker: component checks', () => {
     );
 
     fireEvent(touchables.findInputTouchable(component), 'pressOut');
-    expect(onPressOut).toBeCalled();
+    expect(onPressOut).toHaveBeenCalled();
   });
 
   it('should show the selected date on load provided by date prop', () => {
@@ -586,7 +586,7 @@ describe('@datepicker: component checks', () => {
     const leftArrow = component.queryByTestId('@arrow/left');
     fireEvent.press(leftArrow);
 
-    expect(onVisibleDateChange).toBeCalled();
+    expect(onVisibleDateChange).toHaveBeenCalled();
   });
 
   it('should render custom right arrow', () => {
@@ -620,7 +620,7 @@ describe('@datepicker: component checks', () => {
     const leftArrow = component.queryByTestId('@arrow/right');
     fireEvent.press(leftArrow);
 
-    expect(onVisibleDateChange).toBeCalled();
+    expect(onVisibleDateChange).toHaveBeenCalled();
   });
 
 });

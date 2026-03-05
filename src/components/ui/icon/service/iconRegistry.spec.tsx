@@ -61,7 +61,7 @@ describe('@icon-registry: service checks', () => {
   });
 
   it('should throw when setting not registered pack as default', () => {
-    expect(() => IconRegistryService.setDefaultIconPack('not-registered-pack')).toThrowError();
+    expect(() => IconRegistryService.setDefaultIconPack('not-registered-pack')).toThrow();
   });
 
   it('should change default icon pack', () => {
@@ -83,11 +83,11 @@ describe('@icon-registry: service checks', () => {
   });
 
   it('should throw for getting not registered icon', () => {
-    expect(() => IconRegistryService.getIcon('not-registered-pack')).toThrowError();
+    expect(() => IconRegistryService.getIcon('not-registered-pack')).toThrow();
   });
 
   it('should throw for getting icon from not registered pack', () => {
-    expect(() => IconRegistryService.getIcon('home', 'not-registered-pack')).toThrowError();
+    expect(() => IconRegistryService.getIcon('home', 'not-registered-pack')).toThrow();
   });
 
 });
