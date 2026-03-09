@@ -164,7 +164,7 @@ describe('@range-calendar: component checks', () => {
     const leftArrow = component.queryByTestId('@arrow/left');
     fireEvent.press(leftArrow);
 
-    expect(onVisibleDateChange).toBeCalled();
+    expect(onVisibleDateChange).toHaveBeenCalled();
   });
 
   it('should render custom right arrow', () => {
@@ -193,7 +193,7 @@ describe('@range-calendar: component checks', () => {
     const leftArrow = component.queryByTestId('@arrow/right');
     fireEvent.press(leftArrow);
 
-    expect(onVisibleDateChange).toBeCalled();
+    expect(onVisibleDateChange).toHaveBeenCalled();
   });
 
 });

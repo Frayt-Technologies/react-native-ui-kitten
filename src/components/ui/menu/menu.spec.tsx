@@ -156,7 +156,7 @@ describe('@menu-item: component checks', () => {
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
-    expect(onPressIn).toBeCalled();
+    expect(onPressIn).toHaveBeenCalled();
   });
 
   it('should call onPressOut', () => {
@@ -166,7 +166,7 @@ describe('@menu-item: component checks', () => {
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
-    expect(onPressOut).toBeCalled();
+    expect(onPressOut).toHaveBeenCalled();
   });
 
 });
@@ -296,12 +296,12 @@ describe('@menu: component checks', () => {
     );
 
     fireEvent.press(component.queryByText('Group 1'));
-    expect(onGroupPress).toBeCalledTimes(1);
+    expect(onGroupPress).toHaveBeenCalledTimes(1);
 
     fireEvent.press(component.queryByText('Option 1.1'));
-    expect(onItemPress).toBeCalledTimes(1);
+    expect(onItemPress).toHaveBeenCalledTimes(1);
 
-    expect(onSelect).toBeCalledTimes(2);
+    expect(onSelect).toHaveBeenCalledTimes(2);
   });
 });
 

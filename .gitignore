@@ -26,3 +26,5 @@ src/showcases/web-build/
 
 .expo
 dist
+
+.yarn/install-state.gz

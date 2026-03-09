@@ -342,10 +342,10 @@ describe('@calendar: component checks', () => {
     const navigationNextButton = component.queryAllByType(TouchableOpacity)[2];
 
     fireEvent.press(navigationPrevButton);
-    expect(onVisibleDateChange).toBeCalledTimes(1);
+    expect(onVisibleDateChange).toHaveBeenCalledTimes(1);
 
     fireEvent.press(navigationNextButton);
-    expect(onVisibleDateChange).toBeCalledTimes(2);
+    expect(onVisibleDateChange).toHaveBeenCalledTimes(2);
 
   });
 
@@ -375,7 +375,7 @@ describe('@calendar: component checks', () => {
     const leftArrow = component.queryByTestId('@arrow/left');
     fireEvent.press(leftArrow);
 
-    expect(onVisibleDateChange).toBeCalled();
+    expect(onVisibleDateChange).toHaveBeenCalled();
   });
 
   it('should render custom right arrow', () => {
@@ -404,7 +404,7 @@ describe('@calendar: component checks', () => {
     const leftArrow = component.queryByTestId('@arrow/right');
     fireEvent.press(leftArrow);
 
-    expect(onVisibleDateChange).toBeCalled();
+    expect(onVisibleDateChange).toHaveBeenCalled();
   });
 
 });

@@ -50,7 +50,7 @@ describe('@toggle: component checks', () => {
 
     fireEvent(touchables.findRootTouchable(component), 'responderRelease');
     await waitForElement(() => {
-      expect(onCheckedChange).toBeCalledWith(true);
+      expect(onCheckedChange).toHaveBeenCalledWith(true);
     });
   });
 
@@ -65,7 +65,7 @@ describe('@toggle: component checks', () => {
 
     fireEvent(touchables.findRootTouchable(component), 'responderRelease');
     await waitForElement(() => {
-      expect(onCheckedChange).toBeCalledWith(false);
+      expect(onCheckedChange).toHaveBeenCalledWith(false);
     });
   });
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from 'react-native-testing-library';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider } from './applicationProvider.component';

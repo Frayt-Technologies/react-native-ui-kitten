@@ -44,7 +44,7 @@ describe('@checkbox component checks', () => {
     );
 
     fireEvent.press(component.queryByType(TouchableOpacity));
-    expect(onCheckedChange).toBeCalledWith(true, false);
+    expect(onCheckedChange).toHaveBeenCalledWith(true, false);
   });
 
   it('should request unchecking', () => {
@@ -57,7 +57,7 @@ describe('@checkbox component checks', () => {
     );
 
     fireEvent.press(component.queryByType(TouchableOpacity));
-    expect(onCheckedChange).toBeCalledWith(false, false);
+    expect(onCheckedChange).toHaveBeenCalledWith(false, false);
   });
 
   it('should request clearing indeterminate and checking', () => {
@@ -71,7 +71,7 @@ describe('@checkbox component checks', () => {
     );
 
     fireEvent.press(component.queryByType(TouchableOpacity));
-    expect(onCheckedChange).toBeCalledWith(true, false);
+    expect(onCheckedChange).toHaveBeenCalledWith(true, false);
   });
 
   it('should request clearing indeterminate and unchecking', () => {
@@ -85,7 +85,7 @@ describe('@checkbox component checks', () => {
     );
 
     fireEvent.press(component.queryByType(TouchableOpacity));
-    expect(onCheckedChange).toBeCalledWith(false, false);
+    expect(onCheckedChange).toHaveBeenCalledWith(false, false);
   });
 
   it('should render text', () => {
@@ -135,7 +135,7 @@ describe('@checkbox component checks', () => {
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressIn');
-    expect(onPressIn).toBeCalled();
+    expect(onPressIn).toHaveBeenCalled();
   });
 
   it('should call onPressOut', () => {
@@ -145,7 +145,7 @@ describe('@checkbox component checks', () => {
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'pressOut');
-    expect(onPressOut).toBeCalled();
+    expect(onPressOut).toHaveBeenCalled();
   });
 
   it('should call onMouseEnter', () => {
@@ -156,7 +156,7 @@ describe('@checkbox component checks', () => {
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
-    expect(onMouseEnter).toBeCalled();
+    expect(onMouseEnter).toHaveBeenCalled();
   });
 
   it('should call onMouseLeave', () => {
@@ -167,7 +167,7 @@ describe('@checkbox component checks', () => {
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
-    expect(onMouseLeave).toBeCalled();
+    expect(onMouseLeave).toHaveBeenCalled();
   });
 
   it('should call onFocus', () => {
@@ -178,7 +178,7 @@ describe('@checkbox component checks', () => {
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'focus');
-    expect(onFocus).toBeCalled();
+    expect(onFocus).toHaveBeenCalled();
   });
 
   it('should call onBlur', () => {
@@ -189,7 +189,7 @@ describe('@checkbox component checks', () => {
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'blur');
-    expect(onBlur).toBeCalled();
+    expect(onBlur).toHaveBeenCalled();
   });
 
 });

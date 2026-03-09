@@ -101,7 +101,8 @@ export const withStyles = <P extends object, S>(Component: React.ComponentType<P
     );
   };
 
-  const ThemedComponent = React.forwardRef<WrappedElementInstance, WrappingProps>(WrappingElement);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ThemedComponent = React.forwardRef<WrappedElementInstance, WrappingProps>(WrappingElement as any);
 
   ThemedComponent.displayName = Component.displayName || Component.name;
 

@@ -115,7 +115,7 @@ describe('@bottom-navigation-tab: component checks', () => {
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseEnter');
-    expect(onMouseEnter).toBeCalled();
+    expect(onMouseEnter).toHaveBeenCalled();
   });
 
   it('should call onMouseLeave', () => {
@@ -126,7 +126,7 @@ describe('@bottom-navigation-tab: component checks', () => {
     );
 
     fireEvent(component.queryByType(TouchableOpacity), 'mouseLeave');
-    expect(onMouseLeave).toBeCalled();
+    expect(onMouseLeave).toHaveBeenCalled();
   });
 });
 

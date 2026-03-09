@@ -249,7 +249,7 @@ describe('@input: component checks', () => {
     );
 
     fireEvent.changeText(component.queryByType(TextInput), 'I love Babel');
-    expect(onChangeText).toBeCalledWith('I love Babel');
+    expect(onChangeText).toHaveBeenCalledWith('I love Babel');
   });
 
   it('should call onFocus', () => {
@@ -259,7 +259,7 @@ describe('@input: component checks', () => {
     );
 
     fireEvent(component.queryByType(TextInput), 'focus');
-    expect(onFocus).toBeCalled();
+    expect(onFocus).toHaveBeenCalled();
   });
 
   it('should call onBlur', () => {
@@ -269,6 +269,6 @@ describe('@input: component checks', () => {
     );
 
     fireEvent(component.queryByType(TextInput), 'blur');
-    expect(onBlur).toBeCalled();
+    expect(onBlur).toHaveBeenCalled();
   });
 });

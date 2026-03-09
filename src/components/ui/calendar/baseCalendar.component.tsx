@@ -312,36 +312,36 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
 
   private createViewModeVisibleDate = (page: number): D => {
     switch (this.state.viewMode.id) {
-      case CalendarViewModes.DATE.id: {
-        return this.dateService.addMonth(this.state.visibleDate, page);
-      }
-      case CalendarViewModes.MONTH.id: {
-        return this.dateService.addYear(this.state.pickerDate, page);
-      }
-      case CalendarViewModes.YEAR.id: {
-        return this.dateService.addYear(this.state.pickerDate, VIEWS_IN_PICKER * page);
-      }
-      default: return;
+    case CalendarViewModes.DATE.id: {
+      return this.dateService.addMonth(this.state.visibleDate, page);
+    }
+    case CalendarViewModes.MONTH.id: {
+      return this.dateService.addYear(this.state.pickerDate, page);
+    }
+    case CalendarViewModes.YEAR.id: {
+      return this.dateService.addYear(this.state.pickerDate, VIEWS_IN_PICKER * page);
+    }
+    default: return;
     }
   };
 
   private createViewModeHeaderTitle = (visibleDate: D, pickerDate: D, viewMode: CalendarViewMode): string => {
     switch (viewMode.id) {
-      case CalendarViewModes.DATE.id: {
-        const month: string = this.props.dateService.getMonthName(visibleDate, TranslationWidth.LONG);
-        const year: number = this.props.dateService.getYear(visibleDate);
-        return `${month} ${year}`;
-      }
-      case CalendarViewModes.MONTH.id: {
-        return `${this.dateService.getYear(pickerDate)}`;
-      }
-      case CalendarViewModes.YEAR.id: {
-        const minDateFormat: number = this.dateService.getYear(pickerDate);
-        const maxDateFormat: number = minDateFormat + VIEWS_IN_PICKER - 1;
+    case CalendarViewModes.DATE.id: {
+      const month: string = this.props.dateService.getMonthName(visibleDate, TranslationWidth.LONG);
+      const year: number = this.props.dateService.getYear(visibleDate);
+      return `${month} ${year}`;
+    }
+    case CalendarViewModes.MONTH.id: {
+      return `${this.dateService.getYear(pickerDate)}`;
+    }
+    case CalendarViewModes.YEAR.id: {
+      const minDateFormat: number = this.dateService.getYear(pickerDate);
+      const maxDateFormat: number = minDateFormat + VIEWS_IN_PICKER - 1;
 
-        return `${minDateFormat} - ${maxDateFormat}`;
-      }
-      default: return;
+      return `${minDateFormat} - ${maxDateFormat}`;
+    }
+    default: return;
     }
   };
 
@@ -457,13 +457,13 @@ export abstract class BaseCalendarComponent<P, D = Date> extends React.Component
 
   private renderPickerElement = (style: StyleType): React.ReactNode => {
     switch (this.state.viewMode.id) {
-      case CalendarViewModes.DATE.id:
-        return this.renderDayPickerElement(this.state.visibleDate, style);
-      case CalendarViewModes.MONTH.id:
-        return this.renderMonthPickerElement(this.state.pickerDate, style);
-      case CalendarViewModes.YEAR.id:
-        return this.renderYearPickerElement(this.state.pickerDate, style);
-      default: return;
+    case CalendarViewModes.DATE.id:
+      return this.renderDayPickerElement(this.state.visibleDate, style);
+    case CalendarViewModes.MONTH.id:
+      return this.renderMonthPickerElement(this.state.pickerDate, style);
+    case CalendarViewModes.YEAR.id:
+      return this.renderYearPickerElement(this.state.pickerDate, style);
+    default: return;
     }
   };
 

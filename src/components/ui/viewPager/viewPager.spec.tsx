@@ -51,7 +51,7 @@ describe('@view-pager: component checks', () => {
       </TestViewPager>,
     );
 
-    expect(shouldLoadComponent).toBeCalledTimes(2);
+    expect(shouldLoadComponent).toHaveBeenCalledTimes(2);
   });
 
   it('should not render child if disabled by shouldLoadComponent', () => {
