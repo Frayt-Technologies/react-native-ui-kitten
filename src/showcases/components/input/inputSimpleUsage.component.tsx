@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input } from '@ui-kitten/components';
+import { Input } from '@frayt/components';
 
 export const InputSimpleUsageShowcase = (): React.ReactElement => {
 

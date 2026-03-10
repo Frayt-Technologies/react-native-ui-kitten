@@ -22,14 +22,14 @@ import {
   EvaStatus,
   RenderProp,
   FalsyFC,
-} from '@ui-kitten/components/devsupport';
+} from '@frayt/components/devsupport';
 import {
   IconProps,
   styled,
   StyledComponentProps,
   StyleType,
   Text,
-} from '@ui-kitten/components';
+} from '@frayt/components';
 import { CircularProgressBarAnimation, CircularProgressBarAnimationConfig } from './animation';
 
 type CircularProgressBarStyledProps = Overwrite<StyledComponentProps, {

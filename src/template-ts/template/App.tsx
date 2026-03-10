@@ -22,8 +22,8 @@ import {
   IconRegistry,
   Layout,
   Text,
-} from '@ui-kitten/components';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
+} from '@frayt/components';
+import { EvaIconsPack } from '@frayt/eva-icons';
 import * as eva from '@eva-design/eva';
 
 /**

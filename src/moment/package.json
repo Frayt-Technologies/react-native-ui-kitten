@@ -24,7 +24,7 @@
     "moment": "^2.24.0"
   },
   "peerDependencies": {
-    "@ui-kitten/components": "5.3.1",
+    "@frayt/components": "5.3.1",
     "moment": "^2.24.0"
   },
   "sideEffects": false

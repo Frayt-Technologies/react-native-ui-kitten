@@ -16,4 +16,4 @@ assignees: ''
 | Package      | Version |
 | ----------- | ----------- |
 | @eva-design/eva      |        |
-| @ui-kitten/components   |         |
+| @frayt/components   |         |

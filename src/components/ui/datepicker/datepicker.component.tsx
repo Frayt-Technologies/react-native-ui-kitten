@@ -175,7 +175,7 @@ export type DatepickerElement<D = Date> = React.ReactElement<DatepickerProps<D>>
  * @overview-example DatepickerStyling
  * Datepicker and it's inner views can be styled by passing them as function components.
  * ```
- * import { Datepicker, Text } '@ui-kitten/components';
+ * import { Datepicker, Text } '@frayt/components';
  *
  * <Datepicker
  *   controlStyle={{ ... }}

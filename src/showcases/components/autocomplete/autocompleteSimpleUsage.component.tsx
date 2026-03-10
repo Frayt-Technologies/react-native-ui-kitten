@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Autocomplete, AutocompleteItem } from '@ui-kitten/components';
+import { Autocomplete, AutocompleteItem } from '@frayt/components';
 
 const movies = [
   { title: 'Star Wars' },

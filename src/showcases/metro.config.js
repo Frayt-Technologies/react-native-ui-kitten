@@ -9,7 +9,7 @@ const frameworkModules = [
 ];
 
 const moduleDependencies = [
-  // @ui-kitten/components
+  // @frayt/components
   path.resolve(env.EVA_PATH, 'eva'),
   path.resolve(env.EVA_PATH, 'processor'),
   path.resolve(__dirname, '../../node_modules/@eva-design/dss'),
@@ -17,7 +17,7 @@ const moduleDependencies = [
   path.resolve(__dirname, '../../node_modules/lodash.merge'),
   path.resolve(__dirname, '../../node_modules/fecha'),
 
-  // @ui-kitten/eva-icons
+  // @frayt/eva-icons
   path.resolve(__dirname, '../../node_modules/react-native-eva-icons'),
   path.resolve(__dirname, '../../node_modules/react-native-svg'),
 

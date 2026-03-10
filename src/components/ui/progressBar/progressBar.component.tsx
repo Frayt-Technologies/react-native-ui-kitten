@@ -18,12 +18,12 @@ import {
   EvaStatus,
   LiteralUnion,
   Overwrite,
-} from '@ui-kitten/components/devsupport';
+} from '@frayt/components/devsupport';
 import {
   styled,
   StyledComponentProps,
   StyleType,
-} from '@ui-kitten/components';
+} from '@frayt/components';
 import { ProgressBarAnimation, ProgressBarAnimationConfig } from './animation';
 
 type ProgressBarStyledProps = Overwrite<StyledComponentProps, {

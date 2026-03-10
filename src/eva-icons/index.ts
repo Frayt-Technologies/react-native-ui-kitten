@@ -1,4 +1,4 @@
-import { IconPack } from '@ui-kitten/components';
+import { IconPack } from '@frayt/components';
 import { SvgProps } from 'react-native-svg';
 import { createIconsMap } from './createIconsMap';
 

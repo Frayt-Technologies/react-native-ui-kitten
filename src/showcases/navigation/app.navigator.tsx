@@ -8,7 +8,7 @@ import {
   Text,
   Button,
   Icon,
-} from '@ui-kitten/components';
+} from '@frayt/components';
 
 const HeartIcon = (props: ImageProps): React.ReactElement<ImageProps> => (
   <Icon

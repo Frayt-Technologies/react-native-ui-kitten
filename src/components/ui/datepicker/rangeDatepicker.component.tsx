@@ -15,8 +15,8 @@ import {
   RangeCalendarElement,
   RangeCalendarProps,
 } from '../calendar/rangeCalendar.component';
-import { RenderProp } from '@ui-kitten/components/devsupport';
-import { TextProps } from '@ui-kitten/components';
+import { RenderProp } from '@frayt/components/devsupport';
+import { TextProps } from '@frayt/components';
 
 export type RangeDatepickerProps<D = Date> = BaseDatepickerProps<D> & RangeCalendarProps<D>;
 export type RangeDatepickerElement<D = Date> = React.ReactElement<RangeDatepickerProps<D>>;

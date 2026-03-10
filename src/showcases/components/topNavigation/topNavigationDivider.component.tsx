@@ -9,7 +9,7 @@ import {
   ListItem,
   TopNavigation,
   TopNavigationAction,
-} from '@ui-kitten/components';
+} from '@frayt/components';
 
 interface IListItem {
   title: string;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Input, Layout } from '@ui-kitten/components';
+import { Input, Layout } from '@frayt/components';
 
 export const InputStatesShowcase = (): React.ReactElement => {
 

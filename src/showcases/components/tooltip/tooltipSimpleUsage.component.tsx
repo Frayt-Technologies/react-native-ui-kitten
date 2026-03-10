@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Tooltip } from '@ui-kitten/components';
+import { Button, Tooltip } from '@frayt/components';
 
 export const TooltipSimpleUsageShowcase = (): React.ReactElement => {
 

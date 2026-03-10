@@ -9,7 +9,7 @@ import {
   Text,
   TopNavigation,
   TopNavigationAction,
-} from '@ui-kitten/components';
+} from '@frayt/components';
 
 
 const MenuIcon = (props): IconElement => (

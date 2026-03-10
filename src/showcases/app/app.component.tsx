@@ -7,8 +7,8 @@ import {
   ApplicationProvider,
   ApplicationProviderProps,
   IconRegistry,
-} from '@ui-kitten/components';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
+} from '@frayt/components';
+import { EvaIconsPack } from '@frayt/eva-icons';
 import { default as customMapping } from './mapping.json';
 import { themes } from './themes';
 import { AppNavigator } from '../navigation/app.navigator';

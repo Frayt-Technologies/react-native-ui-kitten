@@ -33,7 +33,7 @@ This will help us to resolve it faster.
 | Package      | Version |
 | ----------- | ----------- |
 | @eva-design/eva      |        |
-| @ui-kitten/components   |         |
+| @frayt/components   |         |
 
 ## Environment information
 

@@ -30,8 +30,8 @@
 
 - docs - Documentation and framework website built on top on the framework
 - src
-    - components - `@ui-kitten/components` package. UI components itself.     
-    - eva-icons - `@ui-kitten/eva-icons` package. Eva Icons for React Native     
+    - components - `@frayt/components` package. UI components itself.     
+    - eva-icons - `@frayt/eva-icons` package. Eva Icons for React Native     
     - date-fns - `@ui-kitten/moment` package. Services that allows UI Kitten components to work with date-fns.
     - moment - `@ui-kitten/moment` package. Services that allows UI Kitten components to work with moment.js.    
     - template-js - `@ui-kitten/template-js` package. Template app for creating UI Kitten project with React Native CLI.    

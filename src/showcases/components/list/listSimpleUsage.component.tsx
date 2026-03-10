@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { List, ListItem } from '@ui-kitten/components';
+import { List, ListItem } from '@frayt/components';
 
 const data = new Array(8).fill({
   title: 'Item',

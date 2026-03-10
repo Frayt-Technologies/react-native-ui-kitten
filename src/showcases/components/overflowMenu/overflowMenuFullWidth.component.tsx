@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Button, Layout, MenuItem, OverflowMenu } from '@ui-kitten/components';
+import { Button, Layout, MenuItem, OverflowMenu } from '@frayt/components';
 
 export const OverflowMenuFullWidthShowcase = (): React.ReactElement => {
 
