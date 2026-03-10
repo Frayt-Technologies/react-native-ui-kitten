@@ -1,16 +1,16 @@
 {
-  "name": "@ui-kitten/metro-config",
+  "name": "@frayt/metro-config",
   "description": "UI Kitten config for Metro Bundler",
   "version": "5.3.1",
   "author": "akveo <contact@akveo.com>",
   "license": "MIT",
-  "homepage": "https://github.com/akveo/react-native-ui-kitten#readme",
+  "homepage": "https://github.com/Frayt-Technologies/react-native-ui-kitten#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akveo/react-native-ui-kitten.git"
+    "url": "git+https://github.com/Frayt-Technologies/react-native-ui-kitten.git"
   },
   "bugs": {
-    "url": "https://github.com/akveo/react-native-ui-kitten/issues"
+    "url": "https://github.com/Frayt-Technologies/react-native-ui-kitten/issues"
   },
   "publishConfig": {
     "access": "public"
