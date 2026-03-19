@@ -6,6 +6,8 @@
 
 import React from 'react';
 import {
+  findNodeHandle,
+  UIManager,
   StatusBar,
 } from 'react-native';
 import { Frame } from './type';
@@ -73,8 +75,16 @@ export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringE
 
   const measureSelf = (): void => {
     const current = nodeRef.current;
-    if (current != null && typeof current.measureInWindow === 'function') {
+    if (current == null) {
+      return;
+    }
+    if (typeof current.measureInWindow === 'function') {
       current.measureInWindow(onUIManagerMeasure);
+    } else {
+      const node = findNodeHandle(current);
+      if (node != null) {
+        UIManager.measureInWindow(node, onUIManagerMeasure);
+      }
     }
   };
 
