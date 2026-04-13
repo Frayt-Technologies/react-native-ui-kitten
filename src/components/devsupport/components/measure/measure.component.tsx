@@ -20,6 +20,10 @@ export interface MeasureElementProps {
 }
 
 export type MeasuringElement = React.ReactElement;
+type MeasureInWindowCallback = (x: number, y: number, w: number, h: number) => void;
+type MeasurableNode = React.Component<unknown, unknown> & {
+  measureInWindow?: (callback: MeasureInWindowCallback) => void;
+};
 /**
  * Measures child element size and it's screen position asynchronously.
  * Returns measure result in `onMeasure` callback.
@@ -46,21 +50,27 @@ export type MeasuringElement = React.ReactElement;
  */
 export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringElement => {
 
-  const nodeRef = React.useRef<any>(null);
+  const nodeRef = React.useRef<MeasurableNode | null>(null);
 
   const bindToWindow = (frame: Frame, window: Frame): Frame => {
-    if (frame.origin.x < window.size.width) {
+    const originX = frame.origin.x;
+    const windowWidth = window.size.width;
+
+    if (!Number.isFinite(originX) ||
+      !Number.isFinite(windowWidth) ||
+      windowWidth <= 0 ||
+      originX < windowWidth) {
       return frame;
     }
 
     const boundFrame: Frame = new Frame(
-      frame.origin.x - window.size.width,
+      originX % windowWidth,
       frame.origin.y,
       frame.size.width,
       frame.size.height,
     );
 
-    return bindToWindow(boundFrame, window);
+    return boundFrame;
   };
 
   const onUIManagerMeasure = (x: number, y: number, w: number, h: number): void => {
@@ -88,7 +98,7 @@ export const MeasureElement: React.FC<MeasureElementProps> = (props): MeasuringE
     }
   };
 
-  const callbackRef = React.useCallback((node: any) => {
+  const callbackRef = React.useCallback((node: MeasurableNode | null) => {
     nodeRef.current = node;
   }, []);
 
