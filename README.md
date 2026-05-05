@@ -56,6 +56,26 @@ Need to quickly build an admin panel for your mobile app? Check out UI builder [
 
 <a href="https://uibakery.io"><img src="https://storage.uibakery.io/video-assets/landing/Logo/UIB%20400x150.png" height="80" /></a>
 
+## Publishing
+
+Steps to publish a package to npm:
+
+1. **Bump the version** of the package(s) you want to publish in their respective `package.json` files.
+2. **Enable 2FA** on your npm account (required for publishing).
+3. **Log in to npm** from your terminal:
+   ```bash
+   npm login
+   ```
+4. **Build the project** using yarn (the build is required before publishing):
+   ```bash
+   yarn build
+   ```
+5. **Publish the package.** It is recommended to publish a single package at a time rather than all packages at once:
+   ```bash
+   cd dist/<package-name>
+   npm publish
+   ```
+
 ## How can I support the developers?
 - Star our GitHub repo :star:
 - Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
